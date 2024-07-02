@@ -1,7 +1,7 @@
 "use client";
 import { useThemeContext } from "@/providers/ThemeProvider";
 
-export default function Editor() {
+export default function Portfolio() {
   const { twColorClasses } = useThemeContext();
 
   return (

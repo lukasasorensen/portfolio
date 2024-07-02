@@ -114,14 +114,14 @@ export default function NavBar() {
               Home
             </Link>
             <Link
-              href="/editor"
+              href="/portfolio"
               className={
-                pathname === "/editor"
+                pathname === "/portfolio"
                   ? mobileActiveLinkClasses
                   : mobileNonActiveLinkClasse
               }
             >
-              Editor
+              Portfolio
             </Link>
           </div>
         </div>
