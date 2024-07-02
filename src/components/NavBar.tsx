@@ -82,13 +82,13 @@ export default function NavBar() {
                   Home
                 </Link>
                 <Link
-                  href="/editor"
+                  href="/portfolio"
                   aria-current="page"
                   className={
-                    pathname === "/editor" ? activeLinkClasses : nonActiveLinkClasses
+                    pathname === "/portfolio" ? activeLinkClasses : nonActiveLinkClasses
                   }
                 >
-                  Editor
+                  Portfolio
                 </Link>
               </div>
             </div>
