@@ -8,8 +8,6 @@ import { useThemeContext } from "@/providers/ThemeProvider";
 import { useState } from "react";
 
 export default function Editor() {
-  const [lyrics, setLyrics] = useState<ILyrics | null>(darkHallowLyrics);
-  const [mode, setMode] = useState<"edit-text" | "edit-chords" | "view">("edit-chords");
   const { twColorClasses } = useThemeContext();
 
   return (
@@ -19,31 +17,8 @@ export default function Editor() {
       <h1
         className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}
       >
-        Lyric Creator
+        Lukas A Sorensen
       </h1>
-      <div
-        className={`lyrics-editor-outer-container container mx-auto flex flex-col justify-center rounded-2xl ${twColorClasses.BG_SECONDARY} py-10`}
-      >
-        <div className="container mb-10 flex w-full flex-row justify-center gap-5">
-          {mode === "edit-text" && (
-            <ThemedButton
-              text="Done"
-              color="primary"
-              onClick={() => setMode("edit-chords")}
-            ></ThemedButton>
-          )}
-          {mode === "edit-chords" && (
-            <ThemedButton
-              text="Edit Text"
-              color="secondary"
-              onClick={() => setMode("edit-text")}
-            ></ThemedButton>
-          )}
-        </div>
-        <div className="lyrics-container">
-          {lyrics && <LyricEditor lyrics={lyrics} />}
-        </div>
-      </div>
     </main>
   );
 }

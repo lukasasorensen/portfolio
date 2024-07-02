@@ -14,12 +14,12 @@ export default function Home() {
       <h1
         className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}
       >
-        Lyrical
+        lukasasorensen.com
       </h1>
       <ThemedButton
-        text="Lyric Editor"
+        text="Portfolio"
         color="primary"
-        onClick={() => router.push("/editor")}
+        onClick={() => router.push("/portfolio")}
       />
     </main>
   );

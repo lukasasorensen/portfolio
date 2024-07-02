@@ -5,7 +5,6 @@ import "../styles/index.scss";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import NavBar from "@/components/NavBar";
 import { Body } from "@/components/Body";
-import LyricsProvider from "@/providers/LyricsProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <LyricsProvider>
           <body className={inter.className}>
             <Body>
               <NavBar />
               {children}
             </Body>
           </body>
-        </LyricsProvider>
       </ThemeProvider>
     </html>
   );
