@@ -82,6 +82,15 @@ export default function NavBar() {
                   Home
                 </Link>
                 <Link
+                  href="/resume"
+                  aria-current="page"
+                  className={
+                    pathname === "/resume" ? activeLinkClasses : nonActiveLinkClasses
+                  }
+                >
+                  Resume
+                </Link>
+                <Link
                   href="/portfolio"
                   aria-current="page"
                   className={
@@ -112,6 +121,16 @@ export default function NavBar() {
               aria-current="page"
             >
               Home
+            </Link>
+            <Link
+              href="/resume"
+              className={
+                pathname === "/resume"
+                  ? mobileActiveLinkClasses
+                  : mobileNonActiveLinkClasse
+              }
+            >
+              Resume
             </Link>
             <Link
               href="/portfolio"
