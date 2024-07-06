@@ -27,13 +27,13 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
       <a href="/projects" className={`absolute left-24 top-32 text-lg cursor-pointer ${twColorClasses.TEXT_TERTIARY}`}>
         &lt; Back
       </a>
-      <h1 className={`text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>{project?.title}</h1>
       {project?.detailImages && <Carousel images={project?.detailImages} />}
       {!project?.detailImages?.length && project?.imageSrc && (
         <img src={project.imageSrc} alt="" className="h-52 w-full object-cover dark:bg-gray-500" />
       )}
       <div className="max-w-screen-lg">
-        <h3 className={`${twColorClasses.TEXT_TERTIARY} text-xl font-bold mb-4`}>Project Description</h3>
+        <h2 className={`${twColorClasses.TEXT_TERTIARY} text-2xl font-bold`}>{project?.title}</h2>
+        <p className={`mb-4 ${twColorClasses.TEXT_SECONDARY}`}>{project?.company}</p>
         <p className={`${twColorClasses.TEXT_PRIMARY} leading-loose`}>{project?.description}</p>
       </div>
     </main>
