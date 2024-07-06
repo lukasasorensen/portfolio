@@ -24,12 +24,15 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-around ${twColorClasses.BG_PRIMARY} p-24`}>
-      <h1 className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>{project?.title}</h1>
+      <h1 className={`text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>{project?.title}</h1>
       {project?.detailImages && <Carousel images={project?.detailImages} />}
       {!project?.detailImages?.length && project?.imageSrc && (
         <img src={project.imageSrc} alt="" className="h-52 w-full object-cover dark:bg-gray-500" />
       )}
-      <p>{project?.description}</p>
+      <div className="max-w-screen-lg">
+        <h3>Project Description</h3>
+        <p>{project?.description}</p>
+      </div>
     </main>
   );
 }
