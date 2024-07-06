@@ -10,18 +10,16 @@ export function ProjectListing(props: IProjectListingProps) {
   const { twColorClasses } = useThemeContext();
   return (
     <div className={`cursor-pointer rounded-lg p-8 hover:bg-white/10`} onClick={() => props?.onClick?.()}>
-      <a
+      <div
         rel="noopener noreferrer"
-        href="#"
         aria-label="Te nulla oportere reprimique his dolorum"
         className="flex flex-col dark:bg-gray-50"
       >
         <img alt="" className="h-52 w-full object-cover dark:bg-gray-500" src={props.project?.imageSrc} />
-      </a>
+      </div>
       <div className="flex flex-1 flex-col p-6">
         <a
           rel="noopener noreferrer"
-          href="#"
           aria-label="Te nulla oportere reprimique his dolorum"
           className="flex flex-col dark:bg-gray-50"
         ></a>
