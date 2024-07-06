@@ -1,8 +1,12 @@
+import { ICarouselImage } from "@/components/common/Carousel";
+
 export interface IProject {
+  id: string;
   title: string;
   description: string;
   shortDescription: string;
   imageSrc: string;
+  detailImages?: ICarouselImage[];
   skillsUsed: string[];
   linkUrl: string;
   company: string;
@@ -11,6 +15,7 @@ export interface IProject {
 
 const Projects: { [key: string]: IProject } = {
   DIGIDECK_COMPONENTS: {
+    id: "digideck-components",
     title: "DIGIDECK Components",
     description: `The goal of this project was to architect a way for any developer internally or externally to create a DIGIDECK Presentation Component, which is a modular part of the presentation content such as: images, videos, icons, arrows, and anything else you wish to create. During this project I saw to
   
@@ -18,6 +23,14 @@ creating an API called digideckCORE that allowed developers to interact more eas
 `,
     shortDescription: "Modular design elements for the DIGIDECK presentation platform.",
     imageSrc: "/images/COMPONENT_STORE.png",
+    detailImages: [
+      { src: "/images/COMPONENT_STORE.png" },
+      { src: "/images/COMPONENT_CAROUSEL_1.png" },
+      { src: "/images/COMPONENT_CAROUSEL_2.png" },
+      { src: "/images/COMPONENT_CAROUSEL_3.png" },
+      { src: "/images/COMPONENT_CAROUSEL_4.png" },
+      { src: "/images/COMPONENT_CAROUSEL_6.png" },
+    ],
     skillsUsed: [
       "Javascript",
       "NodeJS",
@@ -36,6 +49,7 @@ creating an API called digideckCORE that allowed developers to interact more eas
     date: new Date("2021-1-1"),
   },
   COMPONENT_LAYOUT_EDITOR: {
+    id: "component-layout-editor",
     title: "DIGIDECK Design Editor",
     shortDescription:
       "A WYSIWYG Photoshop/Canva like editor that allows for drag to resize, move, and rotate elements.",
@@ -45,8 +59,17 @@ creating an API called digideckCORE that allowed developers to interact more eas
     company: "Sportsdigita",
     date: new Date("2021-1-1"),
     imageSrc: "/images/DIGIDECK_COMPONENTS_SCREENSHOT.png",
+    detailImages: [
+      { src: "/images/DIGIDECK_COMPONENTS_SCREENSHOT.png" },
+      { src: "/images/LAYOUT_EDITOR_GIF.gif" },
+      { src: "/images/LAYOUT_EDITOR_CAROUSEL_1.png" },
+      { src: "/images/LAYOUT_EDITOR_CAROUSEL_2.png" },
+      { src: "/images/LAYOUT_EDITOR_CAROUSEL_3.png" },
+      { src: "/images/LAYOUT_EDITOR_CAROUSEL_4.png" },
+    ],
   },
   SIDESHIFT_APP: {
+    id: "sideshift-app",
     title: "SideShift Mobile App",
     shortDescription:
       "A job board and social media app for college students to easily apply to local businesses hiring.",
@@ -56,6 +79,7 @@ creating an API called digideckCORE that allowed developers to interact more eas
     description: `SideShift is a startup app that connects college students to local hiring businesses. I was brought on as a consultant to oversee the architecture of a React Native App that would work on Web, Iphone and Andriod, using Supabase Postgres DB as a backend. Using the Expo framework, I worked with junior devs to develop a social media like job board that allowed students to scroll through job postings and employers to create job listings as well as create profiles, message students, and send applications.`,
     date: new Date("2024-4-1"),
     imageSrc: "/images/projectPhone.webp",
+    detailImages: [{ src: "/images/projectPhone.webp" }],
   },
 };
 

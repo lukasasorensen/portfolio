@@ -3,12 +3,13 @@ import { useThemeContext } from "@/providers/ThemeProvider";
 
 export interface IProjectListingProps {
   project: IProject;
+  onClick?: () => void;
 }
 
 export function ProjectListing(props: IProjectListingProps) {
   const { twColorClasses } = useThemeContext();
   return (
-    <div className={`cursor-pointer rounded-lg p-8 hover:bg-white/10`}>
+    <div className={`cursor-pointer rounded-lg p-8 hover:bg-white/10`} onClick={() => props?.onClick?.()}>
       <a
         rel="noopener noreferrer"
         href="#"

@@ -17,9 +17,9 @@ export default function Home() {
         lukasasorensen.com
       </h1>
       <ThemedButton
-        text="Portfolio"
+        text="Projects"
         color="primary"
-        onClick={() => router.push("/portfolio")}
+        onClick={() => router.push("/projects")}
       />
     </main>
   );
