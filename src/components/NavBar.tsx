@@ -14,6 +14,21 @@ export default function NavBar() {
   const mobileActiveLinkClasses = "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white";
   const mobileNonActiveLinkClasse =
     "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white";
+
+  const links = [
+    {
+      href: "/resume",
+      title: "Resume",
+    },
+    {
+      href: "/projects",
+      title: "Projects",
+    },
+    {
+      href: "/blog",
+      title: "Blog",
+    },
+  ];
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -55,25 +70,21 @@ export default function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <a className="flex flex-shrink-0 items-center" href="/">
-                <img className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" />
+              <img className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" />
             </a>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
-                <Link
-                  href="/resume"
-                  aria-current="page"
-                  className={pathname === "/resume" ? activeLinkClasses : nonActiveLinkClasses}
-                >
-                  Resume
-                </Link>
-                <Link
-                  href="/projects"
-                  aria-current="page"
-                  className={pathname.includes("/projects") ? activeLinkClasses : nonActiveLinkClasses}
-                >
-                  Projects
-                </Link>
+                {links.map((link) => (
+                  <Link
+                    key={"desktop-" + link.href}
+                    href={link.href}
+                    aria-current="page"
+                    className={pathname.includes(link.href) ? activeLinkClasses : nonActiveLinkClasses}
+                  >
+                    {link.title}
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="absolute right-0">
@@ -88,25 +99,15 @@ export default function NavBar() {
         <div className="sm:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
-            <Link
-              href="/"
-              className={pathname === "/" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
-              aria-current="page"
-            >
-              Home
-            </Link>
-            <Link
-              href="/resume"
-              className={pathname === "/resume" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
-            >
-              Resume
-            </Link>
-            <Link
-              href="/projects"
-              className={pathname === "/projects" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
-            >
-              Projects
-            </Link>
+            {links.map((link) => (
+              <Link
+                key={"desktop-" + link.href}
+                href={link.href}
+                className={pathname.includes(link.href) ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
+              >
+                {link.title}
+              </Link>
+            ))}
           </div>
         </div>
       )}

@@ -3,14 +3,14 @@ import { ICarouselImage } from "@/components/common/Carousel";
 export interface IProject {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   shortDescription: string;
   imageSrc: string;
   detailImages?: ICarouselImage[];
-  skillsUsed: string[];
-  linkUrl: string;
-  company: string;
-  date: Date;
+  skillsUsed?: string[];
+  linkUrl?: string;
+  company?: string;
+  createdDate?: Date;
 }
 
 const Projects: { [key: string]: IProject } = {
@@ -44,7 +44,7 @@ const Projects: { [key: string]: IProject } = {
     ],
     linkUrl: "https://www.thedigideck.com/customize/",
     company: "Sportsdigita",
-    date: new Date("2021-1-1"),
+    createdDate: new Date("2021-1-1"),
   },
   COMPONENT_LAYOUT_EDITOR: {
     id: "component-layout-editor",
@@ -55,7 +55,7 @@ const Projects: { [key: string]: IProject } = {
     linkUrl: "https://www.thedigideck.com/design/",
     skillsUsed: ["Typescript", "NodeJS", "Webpack", "SOLID/OOPS", "CI/CD", "Git"],
     company: "Sportsdigita",
-    date: new Date("2021-1-1"),
+    createdDate: new Date("2021-1-1"),
     imageSrc: "/images/DIGIDECK_COMPONENTS_SCREENSHOT.png",
     detailImages: [
       { src: "/images/DIGIDECK_COMPONENTS_SCREENSHOT.png" },
@@ -75,7 +75,7 @@ const Projects: { [key: string]: IProject } = {
     linkUrl: "https://www.sideshiftjobs.com/",
     skillsUsed: ["Typescript", "React Native", "Expo", "PostgresSQL", "Supabase", "Git", "Xcode", "Adobe XD"],
     description: `SideShift is a startup app that connects college students to local hiring businesses. I was brought on as a consultant to oversee the architecture of a React Native App that would work on Web, Iphone and Andriod, using Supabase Postgres DB as a backend. \n\nUsing the Expo framework, I worked with junior devs to develop a social media like job board that allowed students to scroll through job postings and employers to create job listings as well as create profiles, message students, and send applications.`,
-    date: new Date("2024-4-1"),
+    createdDate: new Date("2024-4-1"),
     imageSrc: "/images/projectPhone.webp",
     detailImages: [{ src: "/images/projectPhone.webp" }],
   },

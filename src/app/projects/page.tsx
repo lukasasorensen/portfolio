@@ -1,7 +1,7 @@
 "use client";
 import { ProjectListing } from "@/components/projects/ProjectListing";
 import { useThemeContext } from "@/providers/ThemeProvider";
-import Projects from "@/constants/Projects";
+import Projects from "@/example-data/Projects";
 import { useRouter } from "next/navigation";
 
 export default function Portfolio() {

@@ -1,8 +1,13 @@
-import { IProject } from "@/constants/Projects";
+import { IProject } from "@/example-data/Projects";
 import { useThemeContext } from "@/providers/ThemeProvider";
 
 export interface IProjectListingProps {
-  project: IProject;
+  project: {
+    title?: string;
+    createdDate?: Date;
+    shortDescription?: string;
+    imageSrc?: string;
+  };
   onClick?: () => void;
 }
 
@@ -32,7 +37,7 @@ export function ProjectListing(props: IProjectListingProps) {
         </a>
         <h3 className="text-md flex-1 py-2 font-semibold leading-snug">{props.project?.shortDescription}</h3>
         <div className="flex flex-wrap justify-between space-x-2 pt-3 text-xs dark:text-gray-600">
-          <span>{props.project?.date?.toLocaleDateString()}</span>
+          <span>{props.project?.createdDate?.toLocaleDateString()}</span>
         </div>
       </div>
     </div>

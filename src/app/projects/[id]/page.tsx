@@ -1,9 +1,7 @@
 "use client";
-import { ProjectListing } from "@/components/projects/ProjectListing";
 import { useThemeContext } from "@/providers/ThemeProvider";
-import Projects, { IProject } from "@/constants/Projects";
+import Projects, { IProject } from "@/example-data/Projects";
 import { useState } from "react";
-import Image from "next/image";
 import Carousel from "@/components/common/Carousel";
 
 export default function ProjectDetail({ params }: { params: { id: string } }) {
