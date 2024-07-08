@@ -66,8 +66,8 @@ export default function NavBar() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                className="h-10 w-auto"
+                src="/images/LUKASASORENSEN_LOGO.svg"
                 alt="Your Company"
               />
             </div>
