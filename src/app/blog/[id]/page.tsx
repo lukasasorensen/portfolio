@@ -29,7 +29,7 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
       </a>
       {article?.detailImages && <Carousel images={article?.detailImages} />}
       {!article?.detailImages?.length && article?.imageSrc && (
-        <img src={article.imageSrc} alt="" className="h-72 w-full max-w-screen-sm object-cover" />
+        <img src={article.imageSrc} alt="" className="h-72 w-full object-contain" />
       )}
       <div className="mt-10 max-w-screen-md">
         <h2 className={`${twColorClasses.TEXT_TERTIARY} mb-5 text-2xl font-bold`}>{article?.title}</h2>

@@ -13,9 +13,13 @@ export default function Portfolio() {
       <h1 className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>Projects</h1>
       <div className="max-w-screen-lg space-y-6">
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2">
-          <ProjectListing onClick={() => router.push(`/projects/${Projects.DIGIDECK_COMPONENTS.id}`)} project={Projects.DIGIDECK_COMPONENTS} />
-          <ProjectListing onClick={() => router.push(`/projects/${Projects.COMPONENT_LAYOUT_EDITOR.id}`)} project={Projects.COMPONENT_LAYOUT_EDITOR} />
-          <ProjectListing onClick={() => router.push(`/projects/${Projects.SIDESHIFT_APP.id}`)} project={Projects.SIDESHIFT_APP} />
+          {Projects.map((project) => (
+            <ProjectListing
+              key={"project-listing-" + project.id}
+              onClick={() => router.push(`/projects/${project.id}`)}
+              project={project}
+            />
+          ))}
         </div>
       </div>
     </main>

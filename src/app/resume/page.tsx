@@ -6,7 +6,7 @@ export default function Resume() {
   const { twColorClasses } = useThemeContext();
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-around ${twColorClasses.BG_PRIMARY} p-24`}>
+    <main className={`flex min-h-screen flex-col items-center justify-around ${twColorClasses.BG_PRIMARY} px-24 py-12`}>
       <div className="max-w-screen-lg flex flex-col items-center">
         <h1 className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>My Resume</h1>
         <p className="mb-3 max-w-screen-md">

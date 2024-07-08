@@ -1,7 +1,7 @@
 "use client";
 import { ProjectListing } from "@/components/projects/ProjectListing";
 import { useThemeContext } from "@/providers/ThemeProvider";
-import Projects, { IProject } from "@/example-data/Projects";
+import { IProject } from "@/example-data/Projects";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Articles, { IArticle } from "@/example-data/Articles";
