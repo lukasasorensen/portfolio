@@ -3,6 +3,8 @@ import { useThemeContext } from "@/providers/ThemeProvider";
 import { useState } from "react";
 import Carousel from "@/components/common/Carousel";
 import Articles, { IArticle } from "@/example-data/Articles";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function BlogArticle({ params }: { params: { id: string } }) {
   const { twColorClasses } = useThemeContext();
@@ -27,11 +29,13 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
       </a>
       {article?.detailImages && <Carousel images={article?.detailImages} />}
       {!article?.detailImages?.length && article?.imageSrc && (
-        <img src={article.imageSrc} alt="" className="h-72 max-w-screen-sm w-full object-cover" />
+        <img src={article.imageSrc} alt="" className="h-72 w-full max-w-screen-sm object-cover" />
       )}
       <div className="mt-10 max-w-screen-md">
-        <h2 className={`${twColorClasses.TEXT_TERTIARY} text-2xl font-bold mb-5`}>{article?.title}</h2>
-        <p className={`${twColorClasses.TEXT_PRIMARY} whitespace-pre-line leading-loose`}>{decodeURIComponent(article?.articleText ?? '')}</p>
+        <h2 className={`${twColorClasses.TEXT_TERTIARY} mb-5 text-2xl font-bold`}>{article?.title}</h2>
+        <div className={`${twColorClasses.TEXT_PRIMARY} whitespace-pre-line leading-loose`}>
+          <Markdown remarkPlugins={[remarkGfm]} className="markdown">{decodeURIComponent(article?.articleText ?? "")}</Markdown>
+        </div>
       </div>
     </main>
   );
