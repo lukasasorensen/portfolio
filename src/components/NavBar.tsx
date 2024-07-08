@@ -8,12 +8,10 @@ export default function NavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const activeLinkClasses =
-    "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white";
+  const activeLinkClasses = "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white";
   const nonActiveLinkClasses =
     "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white";
-  const mobileActiveLinkClasses =
-    "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white";
+  const mobileActiveLinkClasses = "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white";
   const mobileNonActiveLinkClasse =
     "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white";
   return (
@@ -40,11 +38,7 @@ export default function NavBar() {
                 stroke="currentColor"
                 aria-hidden="true"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
               {/* Icon when menu is open. Menu open: "block", Menu closed: "hidden" */}
               <svg
@@ -55,47 +49,28 @@ export default function NavBar() {
                 stroke="currentColor"
                 aria-hidden="true"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
-              <img
-                className="h-10 w-auto"
-                src="/images/LUKASASORENSEN_LOGO.svg"
-                alt="Your Company"
-              />
-            </div>
+            <a className="flex flex-shrink-0 items-center" href="/">
+                <img className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" />
+            </a>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
                 <Link
-                  href="/"
-                  className={pathname === "/" ? activeLinkClasses : nonActiveLinkClasses}
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-                <Link
                   href="/resume"
                   aria-current="page"
-                  className={
-                    pathname === "/resume" ? activeLinkClasses : nonActiveLinkClasses
-                  }
+                  className={pathname === "/resume" ? activeLinkClasses : nonActiveLinkClasses}
                 >
                   Resume
                 </Link>
                 <Link
                   href="/projects"
                   aria-current="page"
-                  className={
-                    pathname === "/projects" ? activeLinkClasses : nonActiveLinkClasses
-                  }
+                  className={pathname.includes("/projects") ? activeLinkClasses : nonActiveLinkClasses}
                 >
                   Projects
                 </Link>
@@ -115,30 +90,20 @@ export default function NavBar() {
             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
             <Link
               href="/"
-              className={
-                pathname === "/" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse
-              }
+              className={pathname === "/" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
               aria-current="page"
             >
               Home
             </Link>
             <Link
               href="/resume"
-              className={
-                pathname === "/resume"
-                  ? mobileActiveLinkClasses
-                  : mobileNonActiveLinkClasse
-              }
+              className={pathname === "/resume" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
             >
               Resume
             </Link>
             <Link
               href="/projects"
-              className={
-                pathname === "/projects"
-                  ? mobileActiveLinkClasses
-                  : mobileNonActiveLinkClasse
-              }
+              className={pathname === "/projects" ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
             >
               Projects
             </Link>
