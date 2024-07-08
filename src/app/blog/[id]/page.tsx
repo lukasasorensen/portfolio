@@ -24,7 +24,7 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-around ${twColorClasses.BG_PRIMARY} p-24`}>
-      <a href="/projects" className={`absolute left-24 top-28 cursor-pointer text-lg ${twColorClasses.TEXT_TERTIARY}`}>
+      <a href="/blog" className={`absolute left-24 top-28 cursor-pointer text-lg ${twColorClasses.TEXT_TERTIARY}`}>
         &lt; Back
       </a>
       {article?.detailImages && <Carousel images={article?.detailImages} />}
