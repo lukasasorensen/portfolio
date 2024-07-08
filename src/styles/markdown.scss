@@ -38,6 +38,16 @@
       outline: none;
     }
   }
+
+  ul {
+    padding-left: 30px;
+    margin-top: -30px;
+    line-height: normal;
+    li {
+      line-height: normal;
+      list-style-type: circle;
+    }
+  }
 }
 .dark {
   .markdown {
