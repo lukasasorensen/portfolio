@@ -107,6 +107,9 @@ export default function NavBar() {
               <Link
                 key={"desktop-" + link.href}
                 href={link.href}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }}
                 className={pathname.includes(link.href) ? mobileActiveLinkClasses : mobileNonActiveLinkClasse}
               >
                 {link.title}

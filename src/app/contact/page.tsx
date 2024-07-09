@@ -5,13 +5,13 @@ import { useState } from "react";
 
 export default function Contact() {
   const { twColorClasses } = useThemeContext();
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <main className={`${twColorClasses.BG_PRIMARY} py-14`}>
-      <div className={`mx-auto max-w-screen-md px-4 py-8 lg:py-16`}>
+      <div className={`mx-auto max-w-screen-md px-12 py-8 md:px-4 lg:py-16`}>
         <h2 className={`mb-4 text-center text-4xl font-extrabold tracking-tight ${twColorClasses.TEXT_PRIMARY} `}>
           Contact Us
         </h2>
@@ -28,7 +28,7 @@ export default function Contact() {
               id="email"
               className={`focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm ${twColorClasses.TEXT_PRIMARY} shadow-sm dark:border-gray-600 dark:bg-gray-700  dark:placeholder-gray-400`}
               placeholder="email@example.com"
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -40,7 +40,7 @@ export default function Contact() {
               type="text"
               id="subject"
               className={`focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm ${twColorClasses.TEXT_PRIMARY} shadow-sm dark:border-gray-600 dark:bg-gray-700  dark:placeholder-gray-400`}
-              onChange={e => setSubject(e.target.value)}
+              onChange={(e) => setSubject(e.target.value)}
               required
             />
           </div>
@@ -55,11 +55,17 @@ export default function Contact() {
               id="message"
               rows={6}
               className={`focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment... block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm ${twColorClasses.TEXT_PRIMARY} shadow-sm dark:border-gray-600 dark:bg-gray-700  dark:placeholder-gray-400`}
-              onChange={e => setMessage(e.target.value)}
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </div>
           <a className="float-right" href="mailto:lukasasorensen@gmail.com">
-            <ThemedButton onClick={() => {window.location.href = `mailto:lukas@lukasasorensen?subject=${subject}&body=${message}`}} color="secondary" text="Send Message"></ThemedButton>
+            <ThemedButton
+              onClick={() => {
+                window.location.href = `mailto:lukas@lukasasorensen?subject=${subject}&body=${message}`;
+              }}
+              color="secondary"
+              text="Send Message"
+            ></ThemedButton>
           </a>
         </form>
       </div>
