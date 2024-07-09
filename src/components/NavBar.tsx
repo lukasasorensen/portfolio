@@ -28,6 +28,10 @@ export default function NavBar() {
       href: "/blog",
       title: "Blog",
     },
+    {
+      href: "/contact",
+      title: "Contact",
+    },
   ];
   return (
     <nav className="bg-gray-800">

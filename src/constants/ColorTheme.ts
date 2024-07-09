@@ -37,7 +37,7 @@ export const TailWindColorThemeClasses: {
     BG_SECONDARY: "bg-stone-800",
     BG_TERTIARY: "bg-violet-600",
     BTN_PRIMARY: "bg-cyan-900 text-white hover:bg-cyan-700",
-    BTN_SECONDARY: "bg-slate-100 text-slate-950 hover:bg-slate-500",
+    BTN_SECONDARY: "bg-violet-600 text-white hover:bg-violet-500",
     BTN_DANGER: "bg-cyan-900 text-white",
     BTN_WARN: "bg-slate-100 text-white",
     BTN_NONE: "bg-transparent text-white",
