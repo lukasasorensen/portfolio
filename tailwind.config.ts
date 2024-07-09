@@ -1,7 +1,7 @@
-import { TailWindColorThemeClasses } from "./src/constants/ColorTheme";
+import { ITailWindColorThemeClasses, TailWindColorThemeClasses } from "./src/constants/ColorTheme";
 import type { Config } from "tailwindcss";
 
-const reduceClasses = (obj: { [key: string]: string }) => {
+const reduceClasses = (obj: ITailWindColorThemeClasses) => {
   return Object.values(obj).reduce((acc: string[], curr: string) => {
     acc.push(...curr.split(" "));
     return acc;
@@ -18,16 +18,12 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  safelist: [
-    ...reduceClasses(TailWindColorThemeClasses.dark),
-    ...reduceClasses(TailWindColorThemeClasses.light),
-  ],
+  safelist: [...reduceClasses(TailWindColorThemeClasses.dark), ...reduceClasses(TailWindColorThemeClasses.light)],
   plugins: [],
-  darkMode: 'selector',
+  darkMode: "selector",
 };
 export default config;
