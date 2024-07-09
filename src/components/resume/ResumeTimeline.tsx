@@ -4,7 +4,7 @@ export default function ResumeTimeline() {
   const { twColorClasses } = useThemeContext();
   return (
     <section className={`${twColorClasses.BG_PRIMARY}`}>
-      <div className="container mx-auto max-w-5xl px-4 py-12">
+      <div className="container mx-auto max-w-5xl md:px-4 py-12">
         <div className="mx-4 grid gap-4 sm:grid-cols-12">
           <div className="col-span-12 sm:col-span-3">
             <div className="mb-14 text-center before:mx-auto before:mb-5 before:block before:h-3 before:w-24 before:rounded-md sm:text-left sm:before:mx-0 before:dark:bg-violet-600">
@@ -14,8 +14,8 @@ export default function ResumeTimeline() {
               </span>
             </div>
           </div>
-          <div className="relative col-span-12 space-y-6 px-4 sm:col-span-9">
-            <div className="relative col-span-12 space-y-12 px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:-left-3 sm:before:bottom-0 sm:before:top-2 sm:before:w-0.5 before:dark:bg-gray-300">
+          <div className="relative col-span-12 space-y-6 md:px-4 sm:col-span-9">
+            <div className="relative col-span-12 space-y-12 md:px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:-left-3 sm:before:bottom-0 sm:before:top-2 sm:before:w-0.5 before:dark:bg-gray-300">
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
                 <h3 className="text-xl font-semibold tracking-wide">Sportsdigita - Senior Full Stack Engineer </h3>
                 <time className={`text-xs uppercase tracking-wide ${twColorClasses.TEXT_SECONDARY}`}>
