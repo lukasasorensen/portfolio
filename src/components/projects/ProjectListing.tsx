@@ -14,7 +14,7 @@ export interface IProjectListingProps {
 export function ProjectListing(props: IProjectListingProps) {
   const { twColorClasses } = useThemeContext();
   return (
-    <div className={`cursor-pointer rounded-lg p-8 hover:bg-white/10`} onClick={() => props?.onClick?.()}>
+    <div className={`cursor-pointer rounded-lg p-4 hover:bg-white/10 md:p-8`} onClick={() => props?.onClick?.()}>
       <div
         rel="noopener noreferrer"
         aria-label="Te nulla oportere reprimique his dolorum"
