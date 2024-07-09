@@ -30,15 +30,16 @@ export default function Carousel(props: ICarouselProps) {
         </svg>
       </button>
       <div className="mx-auto flex h-full w-full items-center justify-start gap-6 overflow-auto py-4 lg:gap-8">
-        {props.images.map((image, i) => (
-          <div key={'carousel-image-' + i} className="relative flex w-full flex-shrink-0 sm:w-auto">
-            <img
-              className="aspect-square h-96 object-cover object-center dark:bg-gray-500"
-              src={image.src}
-              alt="Image 1"
-            />
-          </div>
-        ))}
+        {props?.images?.length &&
+          props.images.map((image, i) => (
+            <div key={"carousel-image-" + i} className="relative flex w-full flex-shrink-0 sm:w-auto">
+              <img
+                className="aspect-square h-96 object-cover object-center dark:bg-gray-500"
+                src={image.src}
+                alt="Image 1"
+              />
+            </div>
+          ))}
       </div>
       <button
         aria-label="Slide forward"
