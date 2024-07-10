@@ -1,13 +1,13 @@
 "use client";
-import { useThemeContext } from "@/providers/ThemeProvider";
 import { useState } from "react";
 import Carousel from "@/components/common/Carousel";
 import Articles, { IArticle } from "@/example-data/Articles";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export default function BlogArticle({ params }: { params: { id: string } }) {
-  const { twColorClasses } = useThemeContext();
+   
   const [article, setArticle] = useState<IArticle | null>(null);
 
   const getArticleById = async (id: string): Promise<IArticle | undefined> => {
@@ -24,9 +24,9 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-around ${twColorClasses.BG_PRIMARY} p-8 py-10 md:px-24`}
+      className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}
     >
-      <a href="/blog" className={`cursor-pointer self-start text-lg ${twColorClasses.TEXT_TERTIARY}`}>
+      <a href="/blog" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
         &lt; Back
       </a>
       <div className="mt-5">
@@ -36,8 +36,8 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
         )}
       </div>
       <div className="mt-10 max-w-screen-md">
-        <h2 className={`${twColorClasses.TEXT_TERTIARY} mb-5 text-2xl font-bold`}>{article?.title}</h2>
-        <div className={`${twColorClasses.TEXT_PRIMARY} whitespace-pre-line leading-loose`}>
+        <h2 className={`${tw.TEXT_TERTIARY} mb-5 text-2xl font-bold`}>{article?.title}</h2>
+        <div className={`${tw.TEXT_PRIMARY} whitespace-pre-line leading-loose`}>
           <Markdown remarkPlugins={[remarkGfm]} className="markdown">
             {decodeURIComponent(article?.articleText ?? "")}
           </Markdown>

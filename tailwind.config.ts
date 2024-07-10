@@ -22,7 +22,7 @@ const config: Config = {
       },
     },
   },
-  safelist: [...reduceClasses(TailWindColorThemeClasses.dark), ...reduceClasses(TailWindColorThemeClasses.light)],
+  safelist: [...reduceClasses(TailWindColorThemeClasses)],
   plugins: [],
   darkMode: "selector",
 };

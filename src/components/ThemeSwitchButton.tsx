@@ -1,18 +1,24 @@
 "use client";
-import { useThemeContext } from "@/providers/ThemeProvider";
-import { ButtonHTMLAttributes, useEffect } from "react";
+import { ButtonHTMLAttributes, useEffect, useState } from "react";
 import ThemeService from "@/services/ThemeService";
+import { useThemeContext } from "@/providers/ThemeProvider";
 const themeService = new ThemeService();
 
 export default function ThemeSwitchButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { theme, switchTheme } = useThemeContext();
+  const { theme, setTheme } = useThemeContext();
   const onThemeToggleClick = () => {
-    switchTheme();
-    themeService.setTheme(theme === "light" ? "dark" : "light");
+    const nextTheme = theme === "light" ? "dark" : "light";
+    changeTheme(nextTheme)
   };
 
+  const changeTheme = (newTheme: string) => {
+    setTheme(newTheme);
+    themeService.setTheme(newTheme);
+  }
+
   useEffect(() => {
-    themeService.initializeTheme();
+    const localStorageTheme = themeService.getThemeFromLocalStorage();
+    changeTheme(localStorageTheme);
   }, []);
 
   return (
