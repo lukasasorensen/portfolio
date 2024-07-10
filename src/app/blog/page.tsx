@@ -1,13 +1,12 @@
 "use client";
 import { ProjectListing } from "@/components/projects/ProjectListing";
-import { useThemeContext } from "@/providers/ThemeProvider";
 import { IProject } from "@/example-data/Projects";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import Articles, { IArticle } from "@/example-data/Articles";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export default function Blog() {
-  const { twColorClasses } = useThemeContext();
+   
   const router = useRouter();
 
   const getArticle = (article: IArticle): IProject => {
@@ -22,8 +21,8 @@ export default function Blog() {
   };
 
   return (
-    <main className={`flex min-h-screen flex-col items-center ${twColorClasses.BG_PRIMARY} px-8 py-14 md:px-24`}>
-      <h1 className={`mb-10 text-center text-4xl font-bold ${twColorClasses.TEXT_SECONDARY}`}>Blog</h1>
+    <main className={`flex min-h-screen flex-col items-center ${tw.BG_PRIMARY} px-8 py-14 md:px-24`}>
+      <h1 className={`mb-10 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>Blog</h1>
       <div className="max-w-screen-lg space-y-6">
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2">
           {Articles.map((article) => (

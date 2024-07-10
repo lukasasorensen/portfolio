@@ -1,5 +1,4 @@
-import { IProject } from "@/example-data/Projects";
-import { useThemeContext } from "@/providers/ThemeProvider";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export interface IProjectListingProps {
   project: {
@@ -12,7 +11,6 @@ export interface IProjectListingProps {
 }
 
 export function ProjectListing(props: IProjectListingProps) {
-  const { twColorClasses } = useThemeContext();
   return (
     <div className={`cursor-pointer rounded-lg p-4 hover:bg-white/10 md:p-8`} onClick={() => props?.onClick?.()}>
       <div
@@ -31,7 +29,7 @@ export function ProjectListing(props: IProjectListingProps) {
         <a
           rel="noopener noreferrer"
           href="#"
-          className={`text-lg uppercase tracking-wider hover:underline ${twColorClasses.TEXT_TERTIARY}`}
+          className={`text-lg uppercase tracking-wider hover:underline ${tw.TEXT_TERTIARY}`}
         >
           {props.project?.title}
         </a>
