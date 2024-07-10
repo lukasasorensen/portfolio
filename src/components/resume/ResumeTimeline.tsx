@@ -1,15 +1,15 @@
-import { useThemeContext } from "@/providers/ThemeProvider";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export default function ResumeTimeline() {
-  const { twColorClasses } = useThemeContext();
+   
   return (
-    <section className={`${twColorClasses.BG_PRIMARY}`}>
+    <section className={`${tw.BG_PRIMARY}`}>
       <div className="container mx-auto max-w-5xl md:px-4 py-12">
         <div className="mx-4 grid gap-4 sm:grid-cols-12">
           <div className="col-span-12 sm:col-span-3">
             <div className="mb-14 text-center before:mx-auto before:mb-5 before:block before:h-3 before:w-24 before:rounded-md sm:text-left sm:before:mx-0 before:dark:bg-violet-600">
               <h3 className="text-3xl font-semibold">Lukas Sorensen</h3>
-              <span className={`text-sm font-bold uppercase tracking-wider ${twColorClasses.TEXT_SECONDARY}`}>
+              <span className={`text-sm font-bold uppercase tracking-wider ${tw.TEXT_SECONDARY}`}>
                 Full Stack Engineer
               </span>
             </div>
@@ -18,7 +18,7 @@ export default function ResumeTimeline() {
             <div className="relative col-span-12 space-y-12 md:px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:-left-3 sm:before:bottom-0 sm:before:top-2 sm:before:w-0.5 before:dark:bg-gray-300">
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
                 <h3 className="text-xl font-semibold tracking-wide">Sportsdigita - Senior Full Stack Engineer </h3>
-                <time className={`text-xs uppercase tracking-wide ${twColorClasses.TEXT_SECONDARY}`}>
+                <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
                   OCTOBER 2022 - present
                 </time>
                 <ul className="mt-3 list-disc">
@@ -41,7 +41,7 @@ export default function ResumeTimeline() {
               </div>
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
                 <h3 className="text-xl font-semibold tracking-wide">SportsDigita - Full Stack Engineer </h3>
-                <time className={`text-xs uppercase tracking-wide ${twColorClasses.TEXT_SECONDARY}`}>
+                <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
                   NOVEMBER 2018 - OCTOBER 2022
                 </time>
                 <ul className="mt-3 list-disc">
@@ -69,7 +69,7 @@ export default function ResumeTimeline() {
               </div>
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
                 <h3 className="text-xl font-semibold tracking-wide">Union App LLC - Full Stack Engineer</h3>
-                <time className={`text-xs uppercase tracking-wide ${twColorClasses.TEXT_SECONDARY}`}>
+                <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
                   JANUARY 2016 - NOVEMBER 2018
                 </time>
                 <ul className="mt-3 list-disc">
@@ -86,7 +86,7 @@ export default function ResumeTimeline() {
               </div>
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
                 <h3 className="text-xl font-semibold tracking-wide">Freelance - Front End Web Developer</h3>
-                <time className={`text-xs uppercase tracking-wide ${twColorClasses.TEXT_SECONDARY}`}>
+                <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
                   SEPTEMBER 2013 - JANUARY 2016
                 </time>
                 <ul className="mt-3 list-disc">
