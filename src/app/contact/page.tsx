@@ -4,7 +4,6 @@ import { useState } from "react";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export default function Contact() {
-   
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -13,12 +12,17 @@ export default function Contact() {
     <main className={`${tw.BG_PRIMARY} py-14`}>
       <div className={`mx-auto max-w-screen-md px-12 py-8 md:px-4 lg:py-16`}>
         <h2 className={`mb-4 text-center text-4xl font-extrabold tracking-tight ${tw.TEXT_PRIMARY} `}>
-          Contact Us
+          Want to hire me?
         </h2>
-        <p className={`mb-8 text-center font-light ${tw.TEXT_SECONDARY} sm:text-xl lg:mb-16`}>
-          Want to hire me? Send me an email!
+        <p className={`mb-8 text-center font-light ${tw.TEXT_SECONDARY} h-screen w-full text-2xl md:text-xl lg:mb-16`}>
+          Send an email to{" "}
+          <a className={`${tw.TEXT_TERTIARY}`} href="mailto:lukasasorensen@gmail.com">
+            lukasasorensen@gmail.com
+          </a>
         </p>
-        <form action="#" className={`space-y-8`}>
+
+        {/* form for when backend is setup */}
+        {/* <form action="#" className={`space-y-8`}>
           <div>
             <label htmlFor="email" className={`mb-2 block text-sm font-medium ${tw.TEXT_PRIMARY} `}>
               Your email
@@ -67,7 +71,7 @@ export default function Contact() {
               text="Send Message"
             ></ThemedButton>
           </a>
-        </form>
+        </form> */}
       </div>
     </main>
   );
