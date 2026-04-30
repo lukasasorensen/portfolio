@@ -1,11 +1,14 @@
 "use client";
 import Projects, { IProject } from "@/example-data/Projects";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import Carousel from "@/components/common/Carousel";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
-export default function ProjectDetail({ params }: { params: { id: string } }) {
-   
+export default function ProjectDetail() {
+  const params = useParams<{ id: string }>();
+
   const [project, setProject] = useState<IProject | null>(null);
 
   const getProjectById = async (id: string): Promise<IProject | undefined> => {
@@ -24,9 +27,9 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
     <main
       className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}
     >
-      <a href="/projects" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
+      <Link href="/projects" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
         &lt; Back
-      </a>
+      </Link>
       <div className="mt-5">
         {project?.detailImages && <Carousel images={project?.detailImages} />}
         {!project?.detailImages?.length && project?.imageSrc && (

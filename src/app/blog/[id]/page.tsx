@@ -1,13 +1,16 @@
 "use client";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import Carousel from "@/components/common/Carousel";
 import Articles, { IArticle } from "@/example-data/Articles";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
-export default function BlogArticle({ params }: { params: { id: string } }) {
-   
+export default function BlogArticle() {
+  const params = useParams<{ id: string }>();
+
   const [article, setArticle] = useState<IArticle | null>(null);
 
   const getArticleById = async (id: string): Promise<IArticle | undefined> => {
@@ -26,9 +29,9 @@ export default function BlogArticle({ params }: { params: { id: string } }) {
     <main
       className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}
     >
-      <a href="/blog" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
+      <Link href="/blog" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
         &lt; Back
-      </a>
+      </Link>
       <div className="mt-5">
         {article?.detailImages && <Carousel images={article?.detailImages} />}
         {!article?.detailImages?.length && article?.imageSrc && (
