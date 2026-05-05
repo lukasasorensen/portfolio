@@ -72,9 +72,9 @@ export default function NavBar() {
             </button>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <a className="flex flex-shrink-0 items-center" href="/">
+            <Link className="flex flex-shrink-0 items-center" href="/">
               <img className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" />
-            </a>
+            </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}

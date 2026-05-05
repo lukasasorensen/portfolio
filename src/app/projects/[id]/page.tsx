@@ -24,9 +24,7 @@ export default function ProjectDetail() {
   init();
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}
-    >
+    <main className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}>
       <Link href="/projects" className={`cursor-pointer self-start text-lg ${tw.TEXT_TERTIARY}`}>
         &lt; Back
       </Link>

@@ -1,5 +1,5 @@
 "use client";
-import { ButtonHTMLAttributes, useEffect, useState } from "react";
+import { ButtonHTMLAttributes, useCallback, useEffect, useState } from "react";
 import ThemeService from "@/services/ThemeService";
 import { useThemeContext } from "@/providers/ThemeProvider";
 const themeService = new ThemeService();
@@ -8,18 +8,21 @@ export default function ThemeSwitchButton(props: ButtonHTMLAttributes<HTMLButton
   const { theme, setTheme } = useThemeContext();
   const onThemeToggleClick = () => {
     const nextTheme = theme === "light" ? "dark" : "light";
-    changeTheme(nextTheme)
+    changeTheme(nextTheme);
   };
 
-  const changeTheme = (newTheme: string) => {
-    setTheme(newTheme);
-    themeService.setTheme(newTheme);
-  }
+  const changeTheme = useCallback(
+    (newTheme: string) => {
+      setTheme(newTheme);
+      themeService.setTheme(newTheme);
+    },
+    [setTheme],
+  );
 
   useEffect(() => {
     const localStorageTheme = themeService.getThemeFromLocalStorage();
     changeTheme(localStorageTheme);
-  }, []);
+  }, [changeTheme]);
 
   return (
     <label className="mt-1 inline-flex cursor-pointer items-center">
