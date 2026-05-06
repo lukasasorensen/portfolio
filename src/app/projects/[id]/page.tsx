@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Projects, { IProject } from "@/example-data/Projects";
 import { useState } from "react";
 import { useParams } from "next/navigation";
@@ -31,7 +32,9 @@ export default function ProjectDetail() {
       <div className="mt-5">
         {project?.detailImages && <Carousel images={project?.detailImages} />}
         {!project?.detailImages?.length && project?.imageSrc && (
-          <img src={project.imageSrc} alt="" className="h-52 w-full object-cover dark:bg-gray-500" />
+          <div className="relative h-52 w-full">
+            <Image src={project.imageSrc} alt="" fill className="object-cover dark:bg-gray-500" />
+          </div>
         )}
       </div>
       <div className="max-w-screen-md md:mt-10">

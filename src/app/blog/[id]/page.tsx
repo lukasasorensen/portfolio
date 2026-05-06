@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -33,7 +34,9 @@ export default function BlogArticle() {
       <div className="mt-5">
         {article?.detailImages && <Carousel images={article?.detailImages} />}
         {!article?.detailImages?.length && article?.imageSrc && (
-          <img src={article.imageSrc} alt="" className="h-72 w-full object-contain" />
+          <div className="relative h-72 w-full">
+            <Image src={article.imageSrc} alt="" fill className="object-contain" />
+          </div>
         )}
       </div>
       <div className="mt-10 max-w-screen-md">

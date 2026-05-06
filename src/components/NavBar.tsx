@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeSwitchButton from "./ThemeSwitchButton";
@@ -73,7 +74,7 @@ export default function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <Link className="flex flex-shrink-0 items-center" href="/">
-              <img className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" />
+              <Image className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" width={40} height={40} />
             </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">

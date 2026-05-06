@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export interface IProjectListingProps {
@@ -18,7 +19,9 @@ export function ProjectListing(props: IProjectListingProps) {
         aria-label="Te nulla oportere reprimique his dolorum"
         className="flex flex-col dark:bg-gray-50"
       >
-        <img alt="" className="h-52 w-full object-cover dark:bg-gray-500" src={props.project?.imageSrc} />
+        <div className="relative h-52 w-full">
+          <Image alt="" fill className="object-cover dark:bg-gray-500" src={props.project?.imageSrc ?? ""} />
+        </div>
       </div>
       <div className="flex flex-1 flex-col p-6">
         <a

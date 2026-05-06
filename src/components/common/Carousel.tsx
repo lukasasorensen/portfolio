@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export interface ICarouselImage {
   src: string;
 }
@@ -33,11 +35,14 @@ export default function Carousel(props: ICarouselProps) {
         {props?.images?.length &&
           props.images.map((image, i) => (
             <div key={"carousel-image-" + i} className="relative flex w-full flex-shrink-0 sm:w-auto">
-              <img
-                className="aspect-square h-96 object-cover object-center dark:bg-gray-500"
-                src={image.src}
-                alt="Image 1"
-              />
+              <div className="relative aspect-square h-96">
+                <Image
+                  fill
+                  className="object-cover object-center dark:bg-gray-500"
+                  src={image.src}
+                  alt="Image 1"
+                />
+              </div>
             </div>
           ))}
       </div>
