@@ -1,15 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ChatOpenAI } from "@langchain/openai";
 import { SystemMessage } from "@langchain/core/messages";
+import { tool } from "@langchain/core/tools";
+import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { toUIMessageStream, toBaseMessages } from "@ai-sdk/langchain";
 import { createUIMessageStreamResponse, UIMessage } from "ai";
+import { z } from "zod";
+import { RESUME } from "@/example-data/Resume";
 
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 
 const SYSTEM_PROMPT = `You are a helpful assistant embedded in Lukas A Sorensen's portfolio website. \
-Lukas is a Full Stack Engineer. Answer questions about his work, skills, and experience in a friendly \
-and concise way. If you don't know something specific about Lukas, say so honestly.`;
+Lukas is a Full Stack Engineer. Answer questions about his work, skills, experience, and background \
+in a friendly and concise way. Use the get_resume tool when the user asks about Lukas's resume, \
+work history, skills, experience, projects, or anything professional. If you don't know something \
+specific about Lukas, say so honestly.`;
+
+// Tool: fetch resume data
+const getResumeTool = tool(
+  async () => JSON.stringify(RESUME, null, 2),
+  {
+    name: "get_resume",
+    description:
+      "Fetches Lukas A Sorensen's full resume including work experience, skills, and projects. Use this whenever the user asks about his background, resume, experience, skills, or projects.",
+    schema: z.object({}),
+  },
+);
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,19 +59,25 @@ export async function POST(req: NextRequest) {
 
     const model = new ChatOpenAI({
       openAIApiKey: apiKey,
-      modelName: process.env.OPENAI_MODEL ?? "gpt-5.4-nano",
+      modelName: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
       streaming: true,
       temperature: 0.7,
     });
 
-    // Convert UIMessages to LangChain BaseMessages and prepend system prompt
+    // Convert UIMessages to LangChain BaseMessages
     const baseMessages = await toBaseMessages(trimmedMessages);
-    const langchainMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
+    const agentMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
 
-    const langchainStream = await model.stream(langchainMessages);
+    // Create a ReAct agent with resume tool
+    const agent = createReactAgent({ llm: model, tools: [getResumeTool] });
+
+    const agentStream = await agent.stream(
+      { messages: agentMessages },
+      { streamMode: ["values", "messages"] },
+    );
 
     return createUIMessageStreamResponse({
-      stream: toUIMessageStream(langchainStream),
+      stream: toUIMessageStream(agentStream),
     });
   } catch (err) {
     console.error("[/api/chat] error:", err);

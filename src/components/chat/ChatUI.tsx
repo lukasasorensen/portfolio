@@ -26,11 +26,11 @@ export default function ChatUI() {
   }
 
   return (
-    <div className={`flex h-full flex-col rounded-lg ${tw.BG_SECONDARY} shadow-lg`}>
+    <div className="flex h-full flex-col">
       {/* Message list */}
-      <div className="flex-1 overflow-y-auto space-y-4 p-4">
+      <div className="flex-1 overflow-y-auto space-y-6 px-2 py-4">
         {messages.length === 0 && (
-          <p className={`text-center text-sm ${tw.TEXT_PRIMARY} opacity-60 mt-8`}>
+          <p className={`text-center text-base ${tw.TEXT_PRIMARY} opacity-50 mt-12`}>
             Ask me anything about Lukas A Sorensen&apos;s work and skills!
           </p>
         )}
@@ -46,10 +46,10 @@ export default function ChatUI() {
               className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[80%] rounded-2xl px-4 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
+                className={`max-w-[75%] px-5 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
                   m.role === "user"
-                    ? `${tw.BTN_PRIMARY} rounded-br-sm`
-                    : `${tw.BG_PRIMARY} ${tw.TEXT_PRIMARY} rounded-bl-sm`
+                    ? `${tw.BTN_PRIMARY} rounded-3xl rounded-br-md`
+                    : `${tw.TEXT_PRIMARY} opacity-90`
                 }`}
               >
                 {textContent}
@@ -59,8 +59,8 @@ export default function ChatUI() {
         })}
         {isLoading && (
           <div className="flex justify-start">
-            <div className={`rounded-2xl rounded-bl-sm px-4 py-2 text-sm ${tw.BG_PRIMARY} ${tw.TEXT_PRIMARY}`}>
-              <span className="animate-pulse">...</span>
+            <div className={`px-5 py-3 text-sm ${tw.TEXT_PRIMARY} opacity-50`}>
+              <span className="animate-pulse">●●●</span>
             </div>
           </div>
         )}
@@ -72,16 +72,18 @@ export default function ChatUI() {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input form */}
+      {/* Input area */}
       <form
         onSubmit={handleSubmit}
-        className={`flex items-center gap-2 border-t border-gray-600 p-3`}
+        className="flex items-center gap-3 pt-4 pb-2"
       >
         <input
-          className={`flex-1 rounded-lg bg-gray-700 px-4 py-2 text-sm text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-violet-500`}
+          className={`flex-1 rounded-full px-5 py-3 text-sm outline-none transition-shadow
+            bg-gray-700 text-white placeholder-gray-400
+            focus:ring-2 focus:ring-violet-500 focus:ring-offset-1 focus:ring-offset-transparent`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message…"
+          placeholder="Ask me anything…"
           disabled={isLoading}
           maxLength={2000}
           autoComplete="off"
@@ -89,7 +91,7 @@ export default function ChatUI() {
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className={`rounded-lg px-4 py-2 text-sm font-medium transition-opacity ${tw.BTN_PRIMARY} disabled:opacity-40`}
+          className={`shrink-0 rounded-full px-5 py-3 text-sm font-medium transition-opacity ${tw.BTN_PRIMARY} disabled:opacity-30`}
         >
           Send
         </button>

@@ -1,0 +1,111 @@
+export const RESUME = {
+  name: "Lukas A Sorensen",
+  title: "Full Stack Engineer",
+  summary:
+    "Experienced Full Stack Web Developer with over 10 years of expertise in writing SOLID, maintainable, and extendable code. Passionate about continuous learning, communicative and adept at problem-solving.",
+  contact: {
+    email: "lukasasorensen@gmail.com",
+    website: "https://lukasasorensen.com",
+    github: "https://github.com/lukasasorensen",
+  },
+  experience: [
+    {
+      company: "Sportsdigita",
+      title: "Senior Full Stack Engineer",
+      period: "October 2022 – Present",
+      highlights: [
+        "Provided mentorship and leadership to junior developers through one-on-one coding sessions, comprehensive code reviews, and collaborating on projects.",
+        "Collaborated with UX designers and project managers to deliver new product features.",
+        "Led development on a DIGIDECK JavaScript Framework using the Custom Web Components API, enabling developers to create custom plugins for DIGIDECK presentations and reducing presentation size via tree-shaking.",
+        "Recommended new technologies such as Vue, React, and Webpack; refactored legacy code to maintain best practices.",
+        "Applied SOLID and OOP principles to create extendable, maintainable, and intuitive code.",
+        "Managed deployments to production and oversaw upkeep of CI/CD pipelines.",
+        "Maintained in-code JSDoc comments, Docusaurus markdown pages, and type definitions.",
+      ],
+    },
+    {
+      company: "SideShift",
+      title: "Architect Consultant",
+      period: "February 2024 – May 2024",
+      highlights: [
+        "Collaborated with executives at the startup SideShift to define project scope and requirements.",
+        "Designed and developed the architecture for a React Native app, focusing on scalability and maintainability, using Expo and Postgres.",
+        "Ensured comprehensive documentation and clear guidelines for a seamless handoff to SideShift developers.",
+      ],
+    },
+    {
+      company: "SportsDigita",
+      title: "Full Stack Engineer",
+      period: "November 2018 – October 2022",
+      highlights: [
+        "Developed new features and maintained an enterprise-scale app using Angular, Vue, NodeJS, MongoDB, and SQL.",
+        "Collaborated in an Agile environment using JIRA, Bitbucket, and Confluence.",
+        "Built and maintained RESTful APIs with NodeJS, ExpressJS, and MongoDB.",
+        "Created comprehensive integration and unit tests using Mocha/Chai for TDD on backend REST APIs.",
+        "Integrated application with third-party APIs: SalesForce, Canva, Twilio, Bynder, Hubspot, and Zapier.",
+        "Refactored legacy code to up-to-date best practices and modern technologies.",
+      ],
+    },
+    {
+      company: "Union App LLC",
+      title: "Full Stack Engineer",
+      period: "January 2016 – November 2018",
+      highlights: [
+        "Built a Single Page Application social media platform for US Unions using Angular/TypeScript frontend and a NodeJS/MongoDB backend.",
+        "Collaborated with developers using Agile methods.",
+        "Built and maintained RESTful APIs with NodeJS, ExpressJS, and MongoDB.",
+        "Created and managed CI/CD pipelines using GitHub Workflows.",
+        "Maintained a scalable architecture on AWS using Elastic Beanstalk and EC2.",
+      ],
+    },
+  ],
+  skills: [
+    "TypeScript",
+    "JavaScript",
+    "React",
+    "Next.js",
+    "Vue",
+    "Angular",
+    "React Native",
+    "NodeJS",
+    "ExpressJS",
+    "MongoDB",
+    "PostgreSQL",
+    "Redis",
+    "AWS",
+    "Docker",
+    "CI/CD",
+    "Git",
+    "Webpack",
+    "Tailwind CSS",
+    "SOLID / OOP principles",
+    "Custom Web Components",
+    "Agile / JIRA",
+  ],
+  projects: [
+    {
+      title: "DIGIDECK Components",
+      description:
+        "Architected a modular JavaScript Framework extending the Custom Web Components API, allowing internal and external developers to create presentation plugins. Includes a CLI to bootstrap new plugin apps, a digideckCORE API, and a Docusaurus documentation site with Algolia search.",
+      company: "Sportsdigita",
+      skills: ["JavaScript", "NodeJS", "NPM", "Webpack", "Custom Web Components", "MongoDB", "ExpressJS", "Redis"],
+      link: "https://www.thedigideck.com/customize/",
+    },
+    {
+      title: "DIGIDECK Design Editor",
+      description:
+        "Architected and developed a Photoshop/Canva-like WYSIWYG editor in TypeScript allowing users to drag, resize, move, and rotate plugins on presentations. Features grid snapping, relative snapping, anchoring, percentage units, and multiple media queries.",
+      company: "Sportsdigita",
+      skills: ["TypeScript", "NodeJS", "Webpack", "SOLID/OOP", "CI/CD", "Git"],
+      link: "https://www.thedigideck.com/design/",
+    },
+    {
+      title: "SideShift Mobile App",
+      description:
+        "Led the architecture of a React Native job board and social media app for college students to connect with local hiring businesses, available on Web, iOS, and Android.",
+      company: "SideShift",
+      skills: ["TypeScript", "React Native", "Expo", "PostgreSQL", "Supabase", "Git", "Xcode", "Adobe XD"],
+      link: "https://www.sideshiftjobs.com/",
+    },
+  ],
+};

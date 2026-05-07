@@ -1,21 +1,23 @@
 "use client";
-import { ThemedButton } from "@/components/Themed";
-import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
-export default function Home() {
-  const router = useRouter();
+const ChatUI = dynamic(() => import("@/components/chat/ChatUI"), { ssr: false });
 
+export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-24`}>
-      <div className="pb-16 text-center">
-        <h1 className={`mb-5 text-center text-7xl font-bold ${tw.TEXT_SECONDARY}`}>Lukas A Sorensen</h1>
-        <h2 className={`text-2xl uppercase ${tw.TEXT_TERTIARY}`}>Full Stack Engineer</h2>
+    <main className={`flex min-h-screen flex-col items-center ${tw.BG_PRIMARY} px-6 pb-6 pt-12`}>
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className={`mb-2 text-5xl font-bold ${tw.TEXT_SECONDARY}`}>Lukas A Sorensen</h1>
+        <h2 className={`text-lg uppercase tracking-widest ${tw.TEXT_TERTIARY}`}>Full Stack Engineer</h2>
       </div>
-      <div className="flex w-full max-w-screen-sm justify-evenly flex-wrap">
-        <ThemedButton color="primary" className="text-2xl mb-5" text="Resume" onClick={() => router.push("/resume")} />
-        <ThemedButton color="secondary" className="text-2xl mb-5" text="Contact" onClick={() => router.push("/contact")} />
+
+      {/* Chat — front and center */}
+      <div className="flex w-full max-w-4xl flex-1 flex-col" style={{ minHeight: "60vh" }}>
+        <ChatUI />
       </div>
     </main>
   );
 }
+
