@@ -32,10 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid message format." }, { status: 400 });
     }
     if (lastTextPart.text.length > MAX_INPUT_LENGTH) {
-      return NextResponse.json(
-        { error: "Message too long. Please keep it under 2000 characters." },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Message too long. Please keep it under 2000 characters." }, { status: 400 });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
@@ -45,7 +42,7 @@ export async function POST(req: NextRequest) {
 
     const model = new ChatOpenAI({
       openAIApiKey: apiKey,
-      modelName: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+      modelName: process.env.OPENAI_MODEL ?? "gpt-5.4-nano",
       streaming: true,
       temperature: 0.7,
     });
