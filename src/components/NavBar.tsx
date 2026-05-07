@@ -32,6 +32,10 @@ export default function NavBar() {
       href: "/contact",
       title: "Contact",
     },
+    {
+      href: "/chat",
+      title: "Chat",
+    },
   ];
   return (
     <nav className="bg-gray-800">
