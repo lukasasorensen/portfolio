@@ -1,6 +1,6 @@
 "use client";
-import Projects, { IProject } from "@/example-data/Projects";
-import { useState } from "react";
+import Image from "next/image";
+import Projects from "@/example-data/Projects";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Carousel from "@/components/common/Carousel";
@@ -8,20 +8,7 @@ import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 
 export default function ProjectDetail() {
   const params = useParams<{ id: string }>();
-
-  const [project, setProject] = useState<IProject | null>(null);
-
-  const getProjectById = async (id: string): Promise<IProject | undefined> => {
-    return Object.values(Projects).find((p) => p.id === id);
-  };
-
-  const init = async () => {
-    const getProject = await getProjectById(params.id);
-    if (!getProject) return;
-    setProject(getProject);
-  };
-
-  init();
+  const project = Object.values(Projects).find((p) => p.id === params.id);
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} p-8 py-10 md:px-24`}>
@@ -31,7 +18,9 @@ export default function ProjectDetail() {
       <div className="mt-5">
         {project?.detailImages && <Carousel images={project?.detailImages} />}
         {!project?.detailImages?.length && project?.imageSrc && (
-          <img src={project.imageSrc} alt="" className="h-52 w-full object-cover dark:bg-gray-500" />
+          <div className="relative h-52 w-full">
+            <Image src={project.imageSrc} alt="" fill className="object-cover dark:bg-gray-500" />
+          </div>
         )}
       </div>
       <div className="max-w-screen-md md:mt-10">
