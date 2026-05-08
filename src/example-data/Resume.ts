@@ -7,6 +7,7 @@ export const RESUME = {
     email: "lukasasorensen@gmail.com",
     website: "https://lukasasorensen.com",
     github: "https://github.com/lukasasorensen",
+    linkedin: "https://www.linkedin.com/in/lukasasorensen",
   },
   experience: [
     {

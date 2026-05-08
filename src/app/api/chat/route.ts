@@ -7,15 +7,27 @@ import { toUIMessageStream, toBaseMessages } from "@ai-sdk/langchain";
 import { createUIMessageStreamResponse, UIMessage } from "ai";
 import { z } from "zod";
 import { RESUME } from "@/example-data/Resume";
+import Articles from "@/example-data/Articles";
+import Projects from "@/example-data/Projects";
 
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 
-const SYSTEM_PROMPT = `You are a helpful assistant embedded in Lukas A Sorensen's portfolio website. \
-Lukas is a Full Stack Engineer. Answer questions about his work, skills, experience, and background \
-in a friendly and concise way. Use the get_resume tool when the user asks about Lukas's resume, \
-work history, skills, experience, projects, or anything professional. If you don't know something \
-specific about Lukas, say so honestly.`;
+const SYSTEM_PROMPT = `You are a sharp, knowledgeable AI assistant embedded in Lukas A Sorensen's portfolio website. \
+Your primary audience is recruiters and hiring managers evaluating Lukas as a candidate.
+
+About Lukas: He is a seasoned Full Stack Engineer with 10+ years of experience building production-grade web \
+applications, leading technical architecture, and mentoring engineering teams.
+
+Guidelines:
+- Be concise but persuasive. Lead with impact and business value, then back it up with technical specifics.
+- Highlight his technical breadth: frontend (React, Next.js, Vue, Angular), backend (Node.js, Express, MongoDB, \
+PostgreSQL, Redis), mobile (React Native/Expo), cloud (AWS), and tooling (Docker, CI/CD, Webpack, TypeScript).
+- Use the get_resume tool for any question about experience, work history, skills, accomplishments, or qualifications.
+- Use the get_contact_info tool when asked how to reach Lukas or for contact details.
+- Use the get_blog_and_projects tool for questions about portfolio work, technical writing, blog posts, or shipped projects.
+- Synthesize tool results into crisp, recruiter-friendly responses — avoid dumping raw data.
+- If asked something you cannot answer about Lukas, say so honestly and suggest reaching out via his contact info.`;
 
 // Tool: fetch resume data
 const getResumeTool = tool(
@@ -23,7 +35,43 @@ const getResumeTool = tool(
   {
     name: "get_resume",
     description:
-      "Fetches Lukas A Sorensen's full resume including work experience, skills, and projects. Use this whenever the user asks about his background, resume, experience, skills, or projects.",
+      "Fetches Lukas A Sorensen's full resume including work experience, skills, education, and accomplishments. " +
+      "Use whenever the user asks about his background, career history, qualifications, technical skills, or anything professional.",
+    schema: z.object({}),
+  },
+);
+
+// Tool: fetch contact information
+const getContactInfoTool = tool(
+  async () => JSON.stringify(RESUME.contact, null, 2),
+  {
+    name: "get_contact_info",
+    description:
+      "Returns Lukas A Sorensen's contact information including email, website, GitHub, and LinkedIn. " +
+      "Use whenever the user asks how to reach Lukas or requests his contact details.",
+    schema: z.object({}),
+  },
+);
+
+// Tool: fetch blog posts and portfolio projects
+const getBlogAndProjectsTool = tool(
+  async () => {
+    const projects = Projects.map(({ imageSrc: _imageSrc, detailImages: _detailImages, ...rest }) => rest);
+
+    const articles = Articles.map(({ id, title, articleDescription, createdDate }) => ({
+      id,
+      title,
+      description: articleDescription,
+      createdDate,
+    }));
+
+    return JSON.stringify({ projects, articles }, null, 2);
+  },
+  {
+    name: "get_blog_and_projects",
+    description:
+      "Returns Lukas A Sorensen's portfolio projects and blog articles. " +
+      "Use whenever the user asks about his shipped work, portfolio, technical writing, side projects, or areas of technical interest.",
     schema: z.object({}),
   },
 );
@@ -68,8 +116,8 @@ export async function POST(req: NextRequest) {
     const baseMessages = await toBaseMessages(trimmedMessages);
     const agentMessages = [new SystemMessage(SYSTEM_PROMPT), ...baseMessages];
 
-    // Create a ReAct agent with resume tool
-    const agent = createReactAgent({ llm: model, tools: [getResumeTool] });
+    // Create a ReAct agent with all recruiter-facing tools
+    const agent = createReactAgent({ llm: model, tools: [getResumeTool, getContactInfoTool, getBlogAndProjectsTool] });
 
     const agentStream = await agent.stream(
       { messages: agentMessages },
