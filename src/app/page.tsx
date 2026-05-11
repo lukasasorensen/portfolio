@@ -14,7 +14,7 @@ export default function Home() {
       </div>
 
       {/* Chat — front and center */}
-      <div className="flex w-full max-w-4xl flex-1 flex-col" style={{ minHeight: "60vh" }}>
+      <div className="flex w-full max-w-2xl flex-1 flex-col" style={{ minHeight: "60vh" }}>
         <ChatUI />
       </div>
     </main>

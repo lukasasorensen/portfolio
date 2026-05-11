@@ -2,7 +2,9 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, isTextUIPart } from "ai";
 import { useRef, useEffect, useState, FormEvent } from "react";
+import Image from "next/image";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
+import { FaPaperPlane } from "react-icons/fa";
 
 const transport = new DefaultChatTransport({ api: "/api/chat" });
 
@@ -65,6 +67,7 @@ export default function ChatUI() {
 
       {/* Input area */}
       <form onSubmit={handleSubmit} className="flex items-center gap-3 pb-2 pt-4">
+        <Image src="/ai.svg" alt="" width={20} height={20} />
         <input
           name="aiPromptInput"
           className={`flex-1 border-b border-violet-500 bg-transparent px-5 py-3 text-sm text-white
@@ -79,9 +82,10 @@ export default function ChatUI() {
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className={`shrink-0 rounded-full px-5 py-3 text-sm font-medium transition-opacity ${tw.BTN_PRIMARY} disabled:opacity-30`}
+          aria-label="Ask AI"
+          className={`flex gap-3 rounded-md p-3 text-white transition-opacity ${tw.BTN_PRIMARY} disabled:opacity-30`}
         >
-          Send
+          <FaPaperPlane />
         </button>
       </form>
     </div>
