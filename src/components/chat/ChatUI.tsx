@@ -20,6 +20,7 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import { CopyIcon, MessageSquareTextIcon, RefreshCwIcon } from "lucide-react";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 const transport = new DefaultChatTransport({ api: "/api/chat" });
 const suggestions = [
@@ -149,8 +150,9 @@ export default function ChatUI() {
       ) : (
         <div className="flex w-full flex-1 items-center justify-center">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center">
-            <h2 className="mt-8 text-xl font-semibold tracking-tight text-white sm:text-5xl">
-              Ask AI anything about me!
+            <h2 className="mt-8 flex text-xl font-semibold tracking-tight text-white sm:text-5xl">
+              <Image alt="ai logo" className="h-10 w-auto" src="/ai.svg" width={20} height={20} /> Ask AI anything about
+              me!
             </h2>
 
             <PromptInput className="mt-10 w-full max-w-2xl" onSubmit={handleSubmit}>
