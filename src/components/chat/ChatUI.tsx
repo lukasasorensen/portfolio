@@ -68,7 +68,7 @@ export default function ChatUI() {
           <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.24em] text-cyan-400/80">AI Chat</p>
-              <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas A Sorensen</h1>
+              <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas</h1>
             </div>
             <button
               className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-white"
@@ -82,7 +82,7 @@ export default function ChatUI() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="flex-1 overflow-y-auto px-10 py-6">
             <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
               {messages.map((message) => {
                 const textParts = message.parts.filter(isTextUIPart);
@@ -150,7 +150,7 @@ export default function ChatUI() {
       ) : (
         <div className="flex w-full flex-1 items-center justify-center">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center">
-            <h2 className="mt-8 flex text-xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h2 className="flex text-xl font-semibold tracking-tight text-white sm:text-5xl">
               <Image alt="ai logo" className="h-10 w-auto" src="/ai.svg" width={20} height={20} /> Ask AI anything about
               me!
             </h2>
