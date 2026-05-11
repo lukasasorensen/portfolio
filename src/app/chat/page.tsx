@@ -7,12 +7,8 @@ const ChatUI = dynamic(() => import("@/components/chat/ChatUI"), { ssr: false })
 
 export default function ChatPage() {
   return (
-    <main className={`flex min-h-screen flex-col items-center ${tw.BG_PRIMARY} px-6 pb-6 pt-12`}>
-      <h1 className={`mb-2 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>Chat with AI</h1>
-      <p className={`mb-8 text-center text-sm ${tw.TEXT_PRIMARY} opacity-60`}>
-        Ask me about Lukas A Sorensen&apos;s projects, skills, and experience.
-      </p>
-      <div className="flex w-full max-w-4xl flex-1 flex-col" style={{ minHeight: "60vh" }}>
+    <main className={`flex min-h-screen flex-col ${tw.BG_PRIMARY} px-6 py-10`}>
+      <div className="mx-auto flex w-full max-w-6xl flex-1">
         <ChatUI />
       </div>
     </main>

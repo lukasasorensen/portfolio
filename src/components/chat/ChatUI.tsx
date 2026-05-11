@@ -1,94 +1,193 @@
 "use client";
+
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, isTextUIPart } from "ai";
-import { useRef, useEffect, useState, FormEvent } from "react";
-import Image from "next/image";
-import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
-import { FaPaperPlane } from "react-icons/fa";
-import Markdown from "react-markdown";
+import {
+  Message,
+  MessageAction,
+  MessageActions,
+  MessageContent,
+  MessageResponse,
+  MessageToolbar,
+} from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputBody,
+  PromptInputFooter,
+  type PromptInputMessage,
+  PromptInputSubmit,
+  PromptInputTextarea,
+} from "@/components/ai-elements/prompt-input";
+import { CopyIcon, MessageSquareTextIcon, RefreshCwIcon } from "lucide-react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
 const transport = new DefaultChatTransport({ api: "/api/chat" });
+const suggestions = [
+  "What are Lukas A Sorensen's strongest recent projects?",
+  "Summarize Lukas A Sorensen's experience in one paragraph.",
+  "Which frontend and backend technologies does Lukas A Sorensen use?",
+];
 
 export default function ChatUI() {
-  const { messages, sendMessage, status, error } = useChat({ transport });
+  const { messages, sendMessage, regenerate, setMessages, stop, status, error } = useChat({
+    transport,
+  });
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const hasMessages = messages.length > 0;
   const isLoading = status === "streaming" || status === "submitted";
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  const lastAssistantMessage = useMemo(
+    () => [...messages].reverse().find((message) => message.role === "assistant"),
+    [messages],
+  );
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    const text = input.trim();
-    if (!text || isLoading) return;
+  useEffect(() => {
+    if (hasMessages) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hasMessages, messages, status]);
+
+  function handleSubmit(message: PromptInputMessage) {
+    const text = message.text.trim();
+
+    if (!text || isLoading) {
+      return;
+    }
+
     sendMessage({ text });
     setInput("");
   }
 
   return (
-    <div className="flex h-full flex-col">
-      {/* Message list */}
-      <div className="flex-1 space-y-6 overflow-y-auto px-2 py-4">
-        {messages.length === 0 && (
-          <p className={`text-center text-base ${tw.TEXT_PRIMARY} mt-12 opacity-50`}>
-            Ask me anything about Lukas A Sorensen&apos;s work and skills!
-          </p>
-        )}
-        {messages.map((m) => {
-          const textContent = m.parts
-            .filter(isTextUIPart)
-            .map((p) => p.text)
-            .join("");
-          if (!textContent) return null;
-          return (
-            <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div
-                className={`max-w-[75%] whitespace-pre-wrap px-5 py-3 text-sm leading-relaxed ${
-                  m.role === "user" ? `${tw.BTN_PRIMARY} rounded-3xl rounded-br-md` : `${tw.TEXT_PRIMARY} opacity-90`
-                }`}
-              >
-                <Markdown className="markdown">{textContent}</Markdown>
-              </div>
+    <div className="flex h-full min-h-[70vh] w-full flex-1">
+      {hasMessages ? (
+        <div className="flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur">
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.24em] text-cyan-400/80">AI Chat</p>
+              <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas A Sorensen</h1>
             </div>
-          );
-        })}
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className={`px-5 py-3 text-sm ${tw.TEXT_PRIMARY} opacity-50`}>
-              <span className="animate-pulse">●●●</span>
+            <button
+              className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-white"
+              onClick={() => {
+                setMessages([]);
+                setInput("");
+              }}
+              type="button"
+            >
+              New chat
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-4 py-6">
+            <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+              {messages.map((message) => {
+                const textParts = message.parts.filter(isTextUIPart);
+
+                if (textParts.length === 0) {
+                  return null;
+                }
+
+                const textContent = textParts.map((part) => part.text).join("\n\n");
+                const showActions = lastAssistantMessage?.id === message.id;
+
+                return (
+                  <Fragment key={message.id}>
+                    <Message from={message.role}>
+                      <MessageContent className={message.role === "assistant" ? "max-w-none" : undefined}>
+                        {textParts.map((part, index) => (
+                          <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>
+                        ))}
+                      </MessageContent>
+                    </Message>
+                    {message.role === "assistant" && showActions && (
+                      <MessageToolbar className="mt-0">
+                        <MessageActions>
+                          <MessageAction label="Retry response" onClick={() => void regenerate()} tooltip="Retry">
+                            <RefreshCwIcon className="size-3.5" />
+                          </MessageAction>
+                          <MessageAction
+                            label="Copy response"
+                            onClick={() => void navigator.clipboard.writeText(textContent)}
+                            tooltip="Copy"
+                          >
+                            <CopyIcon className="size-3.5" />
+                          </MessageAction>
+                        </MessageActions>
+                      </MessageToolbar>
+                    )}
+                  </Fragment>
+                );
+              })}
+              <div ref={bottomRef} />
             </div>
           </div>
-        )}
-        {error && <p className="text-center text-sm text-red-500">Something went wrong. Please try again.</p>}
-        <div ref={bottomRef} />
-      </div>
 
-      {/* Input area */}
-      <form onSubmit={handleSubmit} className="flex items-center gap-3 pb-2 pt-4">
-        <Image src="/ai.svg" alt="" width={20} height={20} />
-        <input
-          name="aiPromptInput"
-          className={`flex-1 border-b border-violet-500 bg-transparent px-5 py-3 text-sm text-white
-            placeholder-gray-400 outline-none transition `}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask me anything…"
-          disabled={isLoading}
-          maxLength={2000}
-          autoComplete="off"
-        />
-        <button
-          type="submit"
-          disabled={isLoading || !input.trim()}
-          aria-label="Ask AI"
-          className={`flex gap-3 rounded-md p-3 text-white transition-opacity ${tw.BTN_PRIMARY} disabled:opacity-30`}
-        >
-          <FaPaperPlane />
-        </button>
-      </form>
+          <div className="border-t border-white/10 bg-slate-950/95 p-4">
+            <PromptInput className="mx-auto w-full max-w-3xl" onSubmit={handleSubmit}>
+              <PromptInputBody>
+                <PromptInputTextarea
+                  autoComplete="off"
+                  className="max-h-40 min-h-[3.25rem]"
+                  disabled={isLoading}
+                  maxLength={2000}
+                  onChange={(event) => setInput(event.currentTarget.value)}
+                  placeholder="Ask a follow-up..."
+                  value={input}
+                />
+              </PromptInputBody>
+              <PromptInputFooter>
+                <p className="text-xs text-white/50">{input.length}/2000</p>
+                <PromptInputSubmit disabled={!input.trim() && !isLoading} onStop={stop} status={status} />
+              </PromptInputFooter>
+            </PromptInput>
+            {error && <p className="mt-3 text-center text-sm text-red-400">Something went wrong. Please try again.</p>}
+          </div>
+        </div>
+      ) : (
+        <div className="flex w-full flex-1 items-center justify-center">
+          <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center">
+            <h2 className="mt-8 text-xl font-semibold tracking-tight text-white sm:text-5xl">
+              Ask AI anything about me!
+            </h2>
+
+            <PromptInput className="mt-10 w-full max-w-2xl" onSubmit={handleSubmit}>
+              <PromptInputBody>
+                <PromptInputTextarea
+                  autoComplete="off"
+                  className="max-h-40 min-h-[4rem] text-base"
+                  disabled={isLoading}
+                  maxLength={2000}
+                  onChange={(event) => setInput(event.currentTarget.value)}
+                  placeholder="Ask about projects, experience, or technical skills..."
+                  value={input}
+                />
+              </PromptInputBody>
+              <PromptInputFooter>
+                <p className="text-xs text-white/50">{input.length}/2000</p>
+                <PromptInputSubmit disabled={!input.trim() && !isLoading} onStop={stop} status={status} />
+              </PromptInputFooter>
+            </PromptInput>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {suggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-cyan-400/40 hover:bg-white/10 hover:text-white"
+                  onClick={() => setInput(suggestion)}
+                  type="button"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+
+            {error && <p className="mt-6 text-center text-sm text-red-400">Something went wrong. Please try again.</p>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
