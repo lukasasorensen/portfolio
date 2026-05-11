@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, isTextUIPart } from "ai";
+import { DefaultChatTransport, getToolName, isTextUIPart, isToolUIPart } from "ai";
 import {
   Message,
   MessageAction,
@@ -18,6 +18,7 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
 } from "@/components/ai-elements/prompt-input";
+import { Tool, ToolContent, ToolHeader, ToolInput, ToolOutput } from "@/components/ai-elements/tool";
 import { CopyIcon, MessageSquareTextIcon, RefreshCwIcon } from "lucide-react";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -28,6 +29,9 @@ const suggestions = [
   "Summarize Lukas A Sorensen's experience in one paragraph.",
   "Which frontend and backend technologies does Lukas A Sorensen use?",
 ];
+
+const formatToolTitle = (toolName: string) =>
+  toolName.replace(/[_-]+/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 
 export default function ChatUI() {
   const { messages, sendMessage, regenerate, setMessages, stop, status, error } = useChat({
@@ -48,7 +52,11 @@ export default function ChatUI() {
     if (hasMessages) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [hasMessages, messages, status]);
+
+    if (error) {
+      console.error("ERROR CALLING AI: ", error);
+    }
+  }, [hasMessages, messages, status, error]);
 
   function handleSubmit(message: PromptInputMessage) {
     const text = message.text.trim();
@@ -86,21 +94,52 @@ export default function ChatUI() {
             <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
               {messages.map((message) => {
                 const textParts = message.parts.filter(isTextUIPart);
+                const toolParts = message.parts.filter(isToolUIPart);
 
-                if (textParts.length === 0) {
+                if (textParts.length === 0 && toolParts.length === 0) {
                   return null;
                 }
 
                 const textContent = textParts.map((part) => part.text).join("\n\n");
-                const showActions = lastAssistantMessage?.id === message.id;
+                const showActions = lastAssistantMessage?.id === message.id && textParts.length > 0;
 
                 return (
                   <Fragment key={message.id}>
                     <Message from={message.role}>
-                      <MessageContent className={message.role === "assistant" ? "max-w-none" : undefined}>
+                      <MessageContent className={message.role === "assistant" ? "max-w-none space-y-4" : undefined}>
                         {textParts.map((part, index) => (
                           <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>
                         ))}
+                        {message.role === "assistant" && toolParts.length > 0 && (
+                          <div className="space-y-3">
+                            {toolParts.map((part) => {
+                              const title = formatToolTitle(getToolName(part));
+
+                              return (
+                                <Tool
+                                  key={`${message.id}-${part.toolCallId}`}
+                                  className="border-white/10 bg-white/[0.03]"
+                                  defaultOpen={part.state !== "output-available"}
+                                >
+                                  {part.type === "dynamic-tool" ? (
+                                    <ToolHeader
+                                      state={part.state}
+                                      title={title}
+                                      toolName={part.toolName}
+                                      type={part.type}
+                                    />
+                                  ) : (
+                                    <ToolHeader state={part.state} title={title} type={part.type} />
+                                  )}
+                                  <ToolContent>
+                                    <ToolInput input={part.input} />
+                                    <ToolOutput errorText={part.errorText} output={part.output} />
+                                  </ToolContent>
+                                </Tool>
+                              );
+                            })}
+                          </div>
+                        )}
                       </MessageContent>
                     </Message>
                     {message.role === "assistant" && showActions && (
