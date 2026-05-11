@@ -5,6 +5,7 @@ import { useRef, useEffect, useState, FormEvent } from "react";
 import Image from "next/image";
 import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { FaPaperPlane } from "react-icons/fa";
+import Markdown from "react-markdown";
 
 const transport = new DefaultChatTransport({ api: "/api/chat" });
 
@@ -49,7 +50,7 @@ export default function ChatUI() {
                   m.role === "user" ? `${tw.BTN_PRIMARY} rounded-3xl rounded-br-md` : `${tw.TEXT_PRIMARY} opacity-90`
                 }`}
               >
-                {textContent}
+                <Markdown className="markdown">{textContent}</Markdown>
               </div>
             </div>
           );
