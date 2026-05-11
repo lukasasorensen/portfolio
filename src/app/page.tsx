@@ -6,7 +6,7 @@ const ChatUI = dynamic(() => import("@/components/chat/ChatUI"), { ssr: false })
 
 export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col items-center ${tw.BG_PRIMARY} px-6 pb-6 pt-12`}>
+    <main className={`flex h-full flex-col items-center ${tw.BG_PRIMARY} px-6 pb-6 pt-12`}>
       {/* Header */}
       <div className="mb-8 text-center">
         <h1 className={`mb-2 text-5xl font-bold ${tw.TEXT_SECONDARY}`}>Lukas A Sorensen</h1>
@@ -20,4 +20,3 @@ export default function Home() {
     </main>
   );
 }
-
