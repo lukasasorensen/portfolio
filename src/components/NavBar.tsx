@@ -82,11 +82,14 @@ export default function NavBar() {
             </button>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <Link className="flex flex-shrink-0 items-center" href="/">
+            <Link
+              className={`border-primary-500 flex flex-shrink-0 items-center overflow-hidden rounded-full`}
+              href="/"
+            >
               <Image
                 className="h-10 w-auto"
-                src="/images/LUKASASORENSEN_LOGO.svg"
-                alt="Your Company"
+                src="/images/LUKAS_HEADSHOT_SMALL.png"
+                alt="Lukas Sorensen"
                 width={40}
                 height={40}
               />
