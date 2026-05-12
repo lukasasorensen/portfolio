@@ -12,6 +12,7 @@ import Projects from "@/example-data/Projects";
 
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
+const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
 
 const SYSTEM_PROMPT = `You are a sharp, knowledgeable AI assistant embedded in Lukas A Sorensen's portfolio website. \
 Your primary audience is recruiters and hiring managers evaluating Lukas as a candidate.
@@ -117,14 +118,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "LLM API key is not configured." }, { status: 500 });
     }
 
+    const modelName = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+    const supportsReasoning = REASONING_MODEL_PREFIXES.some((prefix) => modelName.startsWith(prefix));
+
     const model = new ChatOpenAI({
       openAIApiKey: apiKey,
-      modelName: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+      modelName,
       streaming: true,
-      reasoning: {
-        effort: "medium",
-        summary: "auto",
-      },
+      ...(supportsReasoning
+        ? {
+            reasoning: {
+              effort: "medium",
+              summary: "auto",
+            },
+          }
+        : {
+            temperature: 0.7,
+          }),
     });
 
     // Convert UIMessages to LangChain BaseMessages

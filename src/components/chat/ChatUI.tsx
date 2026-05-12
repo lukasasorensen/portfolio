@@ -63,6 +63,7 @@ export default function ChatUI() {
     transport,
   });
   const [input, setInput] = useState("");
+  const [copyError, setCopyError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const hasMessages = messages.length > 0;
@@ -92,6 +93,16 @@ export default function ChatUI() {
 
     sendMessage({ text });
     setInput("");
+  }
+
+  async function handleCopyResponse(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyError(null);
+    } catch (clipboardError) {
+      console.error("Failed to copy response:", clipboardError);
+      setCopyError("Could not copy response. Please copy it manually.");
+    }
   }
 
   return (
@@ -188,13 +199,16 @@ export default function ChatUI() {
                           </MessageAction>
                           <MessageAction
                             label="Copy response"
-                            onClick={() => void navigator.clipboard.writeText(textContent)}
+                            onClick={() => void handleCopyResponse(textContent)}
                             tooltip="Copy"
                           >
                             <CopyIcon className="size-3.5" />
                           </MessageAction>
                         </MessageActions>
                       </MessageToolbar>
+                    )}
+                    {message.role === "assistant" && showActions && copyError && (
+                      <p className="mt-2 text-xs text-red-400">{copyError}</p>
                     )}
                   </Fragment>
                 );
