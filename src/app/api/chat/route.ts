@@ -121,7 +121,10 @@ export async function POST(req: NextRequest) {
       openAIApiKey: apiKey,
       modelName: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
       streaming: true,
-      temperature: 0.7,
+      reasoning: {
+        effort: "medium",
+        summary: "auto",
+      },
     });
 
     // Convert UIMessages to LangChain BaseMessages
