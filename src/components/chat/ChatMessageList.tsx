@@ -3,6 +3,7 @@
 import type { UIMessage } from "ai";
 import type { Ref } from "react";
 
+import { ChatLoadingMessage } from "./ChatLoadingMessage";
 import { ChatMessage } from "./ChatMessage";
 
 type ChatMessageListProps = {
@@ -10,6 +11,7 @@ type ChatMessageListProps = {
   copyError: string | null;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
+  showLoadingMessage: boolean;
   onCopyResponse: (text: string) => void | Promise<void>;
   onRegenerate: () => void | Promise<void>;
 };
@@ -19,11 +21,12 @@ export function ChatMessageList({
   copyError,
   lastAssistantMessageId,
   messages,
+  showLoadingMessage,
   onCopyResponse,
   onRegenerate,
 }: ChatMessageListProps) {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-10">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
       {messages.map((message) => (
         <ChatMessage
           copyError={copyError}
@@ -34,6 +37,7 @@ export function ChatMessageList({
           onRegenerate={onRegenerate}
         />
       ))}
+      {showLoadingMessage && <ChatLoadingMessage />}
       <div ref={bottomRef} />
     </div>
   );

@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ChatConversationView } from "./ChatConversationView";
 import { ChatEmptyState } from "./ChatEmptyState";
 import { chatTransport } from "./chat-config";
+import { hasRenderableMessageContent } from "./chat-utils";
 
 export default function ChatUI() {
   const { messages, sendMessage, regenerate, setMessages, stop, status, error } = useChat({
@@ -18,11 +19,14 @@ export default function ChatUI() {
 
   const hasMessages = messages.length > 0;
   const isLoading = status === "streaming" || status === "submitted";
+  const lastMessage = messages[messages.length - 1];
 
   const lastAssistantMessage = useMemo(
     () => [...messages].reverse().find((message) => message.role === "assistant"),
     [messages],
   );
+  const showLoadingMessage =
+    hasMessages && isLoading && (lastMessage?.role !== "assistant" || !hasRenderableMessageContent(lastMessage));
 
   useEffect(() => {
     if (hasMessages) {
@@ -73,6 +77,7 @@ export default function ChatUI() {
           isLoading={isLoading}
           lastAssistantMessageId={lastAssistantMessage?.id}
           messages={messages}
+          showLoadingMessage={showLoadingMessage}
           onCopyResponse={handleCopyResponse}
           onInputChange={setInput}
           onNewChat={handleNewChat}

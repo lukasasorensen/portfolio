@@ -71,7 +71,7 @@ export const ToolHeader = ({ className, title, type, state, toolName, ...props }
       className={cn("flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left", className)}
       {...props}
     >
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="flex w-full min-w-0 items-center gap-2">
         <WrenchIcon className="text-muted-foreground size-4" />
         <span className="truncate text-sm font-medium">{title ?? derivedName}</span>
         {getStatusBadge(state)}

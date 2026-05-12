@@ -30,8 +30,7 @@ export function ChatEmptyState({
     <div className="flex w-full flex-1 items-center justify-center">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center">
         <h2 className="flex text-xl font-semibold tracking-tight text-white sm:text-5xl">
-          <Image alt="ai logo" className="h-10 w-auto" height={20} src="/ai.svg" width={20} /> Ask AI anything about
-          me!
+          <Image alt="ai logo" className="h-10 w-auto" height={20} src="/ai.svg" width={20} /> Ask AI anything about me!
         </h2>
 
         <ChatPromptInput
@@ -46,7 +45,7 @@ export function ChatEmptyState({
           textareaClassName="max-h-40 min-h-[4rem] text-base"
         />
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-10">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
           {CHAT_SUGGESTIONS.map((suggestion) => (
             <button
               className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-cyan-400/40 hover:bg-white/10 hover:text-white"

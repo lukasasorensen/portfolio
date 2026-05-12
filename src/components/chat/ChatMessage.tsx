@@ -14,6 +14,7 @@ import { Fragment } from "react";
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, type UIMessage } from "ai";
 
 import { InlineToolCall } from "./InlineToolCall";
+import { hasRenderableMessageContent } from "./chat-utils";
 
 type ChatMessageProps = {
   copyError: string | null;
@@ -34,7 +35,7 @@ export function ChatMessage({
   const reasoningParts = message.parts.filter(isReasoningUIPart);
   const contentParts = message.parts.filter((part) => isTextUIPart(part) || isToolUIPart(part));
 
-  if (textParts.length === 0 && reasoningParts.length === 0 && contentParts.length === 0) {
+  if (!hasRenderableMessageContent(message)) {
     return null;
   }
 
@@ -50,21 +51,21 @@ export function ChatMessage({
   return (
     <Fragment>
       <Message from={message.role}>
-        <MessageContent className={message.role === "assistant" ? "max-w-none space-y-10" : undefined}>
+        <MessageContent className={message.role === "assistant" ? "max-w-none space-y-4" : undefined}>
           {message.role === "assistant" && reasoningContent && (
-            <Reasoning isStreaming={isReasoningStreaming}>
+            <Reasoning open={false} isStreaming={isReasoningStreaming}>
               <ReasoningTrigger />
               <ReasoningContent>{reasoningContent}</ReasoningContent>
             </Reasoning>
           )}
           {message.role === "assistant" ? (
-            <div className="flex flex-wrap items-start gap-10">
+            <div className="flex flex-wrap items-start gap-4">
               {contentParts.map((part, index) => {
                 if (isTextUIPart(part)) {
                   return (
-                    <div className="w-full space-y-3" key={`${message.id}-text-${index}`}>
+                    <div className="w-full" key={`${message.id}-text-${index}`}>
                       {index === firstTextPartIndex && (
-                        <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-cyan-400/75">
+                        <div className="bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-cyan-400/75">
                           Assistant
                         </div>
                       )}
@@ -75,7 +76,7 @@ export function ChatMessage({
 
                 if (isToolUIPart(part)) {
                   return (
-                    <div className="w-full max-w-md" key={`${message.id}-tool-${index}`}>
+                    <div className="w-full" key={`${message.id}-tool-${index}`}>
                       <InlineToolCall part={part} />
                     </div>
                   );
@@ -85,7 +86,9 @@ export function ChatMessage({
               })}
             </div>
           ) : (
-            textParts.map((part, index) => <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>)
+            textParts.map((part, index) => (
+              <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>
+            ))
           )}
         </MessageContent>
       </Message>
@@ -101,7 +104,9 @@ export function ChatMessage({
           </MessageActions>
         </MessageToolbar>
       )}
-      {message.role === "assistant" && showActions && copyError && <p className="mt-2 text-xs text-red-400">{copyError}</p>}
+      {message.role === "assistant" && showActions && copyError && (
+        <p className="mt-2 text-xs text-red-400">{copyError}</p>
+      )}
     </Fragment>
   );
 }

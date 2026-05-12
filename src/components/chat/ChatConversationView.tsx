@@ -15,6 +15,7 @@ type ChatConversationViewProps = {
   isLoading: boolean;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
+  showLoadingMessage: boolean;
   status: ChatStatus;
   onCopyResponse: (text: string) => void | Promise<void>;
   onInputChange: (value: string) => void;
@@ -32,6 +33,7 @@ export function ChatConversationView({
   isLoading,
   lastAssistantMessageId,
   messages,
+  showLoadingMessage,
   status,
   onCopyResponse,
   onInputChange,
@@ -42,7 +44,7 @@ export function ChatConversationView({
 }: ChatConversationViewProps) {
   return (
     <div className="flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur">
-      <div className="flex items-center justify-between gap-10 border-b border-white/10 px-6 py-5">
+      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-cyan-400/80">AI Chat</p>
           <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas</h1>
@@ -62,6 +64,7 @@ export function ChatConversationView({
           copyError={copyError}
           lastAssistantMessageId={lastAssistantMessageId}
           messages={messages}
+          showLoadingMessage={showLoadingMessage}
           onCopyResponse={onCopyResponse}
           onRegenerate={onRegenerate}
         />
