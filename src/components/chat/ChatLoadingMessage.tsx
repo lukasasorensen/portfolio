@@ -10,14 +10,29 @@ export function ChatLoadingMessage() {
         <div
           aria-live="polite"
           aria-label="Assistant is responding"
-          className="inline-flex items-center gap-2 rounded-2xl rounded-bl-md border border-white/10 bg-white/5 px-4 py-3 text-white/70 shadow-sm"
+          className="relative inline-flex min-w-[12rem] overflow-hidden rounded-2xl rounded-bl-md border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75 shadow-sm backdrop-blur-md"
           role="status"
         >
           <span className="sr-only">Assistant is responding</span>
-          <span className="size-2 rounded-full bg-cyan-300/80 motion-safe:animate-bounce" />
-          <span className="size-2 rounded-full bg-cyan-300/80 motion-safe:animate-bounce [animation-delay:150ms]" />
-          <span className="size-2 rounded-full bg-cyan-300/80 motion-safe:animate-bounce [animation-delay:300ms]" />
+          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.04)_35%,rgba(255,255,255,0.16)_50%,rgba(255,255,255,0.04)_65%,transparent_100%)] motion-reduce:hidden loading-shimmer" />
+          <span className="relative font-medium tracking-[0.01em]">Thinking...</span>
         </div>
+        <style jsx>{`
+          .loading-shimmer {
+            transform: translateX(-160%);
+            animation: loading-shimmer 2.2s ease-in-out infinite;
+          }
+
+          @keyframes loading-shimmer {
+            from {
+              transform: translateX(-160%);
+            }
+
+            to {
+              transform: translateX(160%);
+            }
+          }
+        `}</style>
       </MessageContent>
     </Message>
   );

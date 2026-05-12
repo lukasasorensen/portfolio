@@ -53,7 +53,7 @@ export function ChatMessage({
       <Message from={message.role}>
         <MessageContent className={message.role === "assistant" ? "max-w-none space-y-4" : undefined}>
           {message.role === "assistant" && reasoningContent && (
-            <Reasoning open={false} isStreaming={isReasoningStreaming}>
+            <Reasoning defaultOpen={false} isStreaming={isReasoningStreaming}>
               <ReasoningTrigger />
               <ReasoningContent>{reasoningContent}</ReasoningContent>
             </Reasoning>
