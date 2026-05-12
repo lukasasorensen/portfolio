@@ -98,7 +98,7 @@ export default function ChatUI() {
     <div className="flex h-full min-h-[70vh] w-full flex-1">
       {hasMessages ? (
         <div className="flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur">
-          <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+          <div className="flex items-center justify-between gap-10 border-b border-white/10 px-6 py-5">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.24em] text-cyan-400/80">AI Chat</p>
               <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas</h1>
@@ -116,7 +116,7 @@ export default function ChatUI() {
           </div>
 
           <div className="flex-1 overflow-y-auto px-10 py-6">
-            <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+            <div className="mx-auto flex w-full max-w-3xl flex-col gap-10">
               {messages.map((message) => {
                 const textParts = message.parts.filter(isTextUIPart);
                 const reasoningParts = message.parts.filter(isReasoningUIPart);
@@ -137,7 +137,7 @@ export default function ChatUI() {
                 return (
                   <Fragment key={message.id}>
                     <Message from={message.role}>
-                      <MessageContent className={message.role === "assistant" ? "max-w-none space-y-4" : undefined}>
+                      <MessageContent className={message.role === "assistant" ? "max-w-none space-y-10" : undefined}>
                         {message.role === "assistant" && reasoningContent && (
                           <Reasoning isStreaming={isReasoningStreaming}>
                             <ReasoningTrigger />
@@ -145,23 +145,30 @@ export default function ChatUI() {
                           </Reasoning>
                         )}
                         {message.role === "assistant" ? (
-                          <div className="flex flex-wrap items-start gap-3">
+                          <div className="flex flex-wrap items-start gap-10">
                             {contentParts.map((part, index) => {
                               if (isTextUIPart(part)) {
                                 return (
-                                  <MessageResponse className="w-full" key={`${message.id}-text-${index}`}>
-                                    {part.text}
-                                  </MessageResponse>
+                                  <div className="w-full space-y-3" key={`${message.id}-text-${index}`}>
+                                    {index === contentParts.findIndex(isTextUIPart) && (
+                                      <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-cyan-400/75">
+                                        Assistant
+                                      </div>
+                                    )}
+                                    <MessageResponse>{part.text}</MessageResponse>
+                                  </div>
                                 );
                               }
 
                               if (isToolUIPart(part)) {
                                 return (
-                                  <InlineToolCall
-                                    key={`${message.id}-${part.toolCallId}`}
-                                    messageId={message.id}
-                                    part={part}
-                                  />
+                                  <div className="w-full max-w-md" key={`${message.id}-tool-${index}`}>
+                                    <InlineToolCall
+                                      key={`${message.id}-${part.toolCallId}`}
+                                      messageId={message.id}
+                                      part={part}
+                                    />
+                                  </div>
                                 );
                               }
                             })}
@@ -243,7 +250,7 @@ export default function ChatUI() {
               </PromptInputFooter>
             </PromptInput>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-10">
               {suggestions.map((suggestion) => (
                 <button
                   key={suggestion}
