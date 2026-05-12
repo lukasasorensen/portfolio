@@ -9,6 +9,7 @@ import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 export default function NavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isLocalEnvironment = process.env.NODE_ENV === "development";
 
   const activeLinkClasses = `rounded-md bg-black/50 px-3 py-2 text-sm font-medium text-white`;
   const nonActiveLinkClasses = `rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`;
@@ -32,11 +33,15 @@ export default function NavBar() {
       href: "/contact",
       title: "Contact",
     },
-    {
-      href: "/chat",
-      title: "Chat",
-    },
   ];
+
+  if (isLocalEnvironment) {
+    links.push({
+      href: "/chat-test",
+      title: "Chat Test",
+    });
+  }
+
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -78,7 +83,13 @@ export default function NavBar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <Link className="flex flex-shrink-0 items-center" href="/">
-              <Image className="h-10 w-auto" src="/images/LUKASASORENSEN_LOGO.svg" alt="Your Company" width={40} height={40} />
+              <Image
+                className="h-10 w-auto"
+                src="/images/LUKASASORENSEN_LOGO.svg"
+                alt="Your Company"
+                width={40}
+                height={40}
+              />
             </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">

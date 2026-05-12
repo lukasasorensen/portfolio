@@ -11,13 +11,16 @@ import { ChatPromptInput } from "./ChatPromptInput";
 type ChatConversationViewProps = {
   bottomRef: Ref<HTMLDivElement>;
   copyError: string | null;
+  eyebrow?: string;
   hasError: boolean;
   input: string;
+  inputPlaceholder?: string;
   isLoading: boolean;
   lastAssistantMessageId?: string;
   messages: UIMessage[];
   showLoadingMessage: boolean;
   status: ChatStatus;
+  title?: string;
   onCopyResponse: (text: string) => void | Promise<void>;
   onInputChange: (value: string) => void;
   onNewChat: () => void;
@@ -29,13 +32,16 @@ type ChatConversationViewProps = {
 export function ChatConversationView({
   bottomRef,
   copyError,
+  eyebrow = "AI Chat",
   hasError,
   input,
+  inputPlaceholder = "Ask a follow-up...",
   isLoading,
   lastAssistantMessageId,
   messages,
   showLoadingMessage,
   status,
+  title = "Ask about Lukas",
   onCopyResponse,
   onInputChange,
   onNewChat,
@@ -49,8 +55,8 @@ export function ChatConversationView({
     >
       <div className="flex items-center justify-between gap-4 border-b border-slate-900/10 px-6 py-5 dark:border-white/10">
         <div>
-          <p className={`text-xs font-medium uppercase tracking-[0.24em] ${tw.TEXT_SECONDARY}`}>AI Chat</p>
-          <h1 className={`mt-2 text-2xl font-semibold ${tw.TEXT_PRIMARY}`}>Ask about Lukas</h1>
+          <p className={`text-xs font-medium uppercase tracking-[0.24em] ${tw.TEXT_SECONDARY}`}>{eyebrow}</p>
+          <h1 className={`mt-2 text-2xl font-semibold ${tw.TEXT_PRIMARY}`}>{title}</h1>
         </div>
         <button
           className={`rounded-full border border-slate-900/10 px-4 py-2 text-sm transition hover:bg-slate-900/5 dark:border-white/10 dark:hover:bg-white/5 ${tw.BTN_NONE}`}
@@ -81,11 +87,15 @@ export function ChatConversationView({
           onInputChange={onInputChange}
           onStop={onStop}
           onSubmit={onSubmit}
-          placeholder="Ask a follow-up..."
+          placeholder={inputPlaceholder}
           status={status}
           textareaClassName="max-h-40 min-h-[3.25rem]"
         />
-        {hasError && <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">Something went wrong. Please try again.</p>}
+        {hasError && (
+          <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">
+            Something went wrong. Please try again.
+          </p>
+        )}
       </div>
     </div>
   );

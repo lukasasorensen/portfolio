@@ -3,4 +3,5 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, type UIMessage } from "a
 export const formatToolTitle = (toolName: string) =>
   toolName.replace(/[_-]+/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 
-export const hasRenderableMessageContent = (message: UIMessage) => message.parts.some((part) => isTextUIPart(part));
+export const hasRenderableMessageContent = (message: UIMessage) =>
+  message.parts.some((part) => isTextUIPart(part) || isReasoningUIPart(part) || isToolUIPart(part));
