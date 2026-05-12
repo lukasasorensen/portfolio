@@ -2,6 +2,7 @@
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { cn } from "@/lib/utils";
 import { cjk } from "@streamdown/cjk";
 import { code } from "@streamdown/code";
@@ -112,7 +113,7 @@ export const Reasoning = memo(
       <ReasoningContext.Provider value={contextValue}>
         <Collapsible
           className={cn(
-            "not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-xl border border-white/10 bg-slate-950/50 shadow-sm",
+            `not-prose mb-4 w-full max-w-2xl self-start overflow-hidden rounded-xl border border-slate-900/10 shadow-sm dark:border-white/10 ${tw.BG_SECONDARY}`,
             className,
           )}
           onOpenChange={handleOpenChange}
@@ -145,21 +146,21 @@ export const ReasoningTrigger = memo(
     const { isStreaming, isOpen, duration } = useReasoning();
 
     return (
-      <CollapsibleTrigger
-        className={cn(
-          "flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-white/55 transition-colors hover:text-white/80",
-          className,
-        )}
+        <CollapsibleTrigger
+          className={cn(
+            "flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-950/60 transition-colors hover:text-slate-950/80 dark:text-white/55 dark:hover:text-white/80",
+            className,
+          )}
         {...props}
       >
         {children ?? (
           <>
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/45">
+              <span className="inline-flex items-center gap-1 rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-950/55 dark:border-white/10 dark:bg-white/5 dark:text-white/45">
                 <BrainIcon className="size-3" />
                 Reasoning
               </span>
-              <span className="min-w-0 truncate text-xs text-white/55">
+              <span className="min-w-0 truncate text-xs text-slate-950/60 dark:text-white/55">
                 {getThinkingMessage(isStreaming, duration)}
               </span>
             </div>
@@ -182,14 +183,14 @@ const streamdownPlugins = { cjk, code, math, mermaid };
 export const ReasoningContent = memo(({ className, children, ...props }: ReasoningContentProps) => (
   <CollapsibleContent
     className={cn(
-      "border-t border-white/10 px-3 pb-3 pt-2.5 text-xs leading-6",
-      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in text-white/60 outline-none",
+      "border-t border-slate-900/10 px-3 pb-3 pt-2.5 text-xs leading-6 dark:border-white/10",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in text-slate-950/70 dark:text-white/60 outline-none",
       className,
     )}
     {...props}
   >
     <Streamdown
-      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-black/20 [&_code]:px-1 [&_code]:py-0.5 [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-black/30 [&_pre]:p-3 [&_ul]:pl-5"
+      className="break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:rounded [&_code]:bg-slate-900/10 dark:[&_code]:bg-black/20 [&_code]:px-1 [&_code]:py-0.5 [&_ol]:pl-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-900/10 dark:[&_pre]:bg-black/30 [&_pre]:p-3 [&_ul]:pl-5"
       plugins={streamdownPlugins}
     >
       {children}

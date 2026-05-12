@@ -1,5 +1,6 @@
 "use client";
 
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { cn } from "@/lib/utils";
 import { cjk } from "@streamdown/cjk";
 import { code } from "@streamdown/code";
@@ -32,7 +33,7 @@ export const MessageContent = ({ children, className, ...props }: MessageContent
     className={cn(
       "min-w-0 max-w-full text-sm leading-7",
       "group-[.is-user]:max-w-[80%] group-[.is-user]:rounded-2xl group-[.is-user]:rounded-br-md group-[.is-user]:bg-violet-600 group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-white",
-      "group-[.is-assistant]:w-full group-[.is-assistant]:text-white/90",
+      "group-[.is-assistant]:w-full group-[.is-assistant]:text-slate-950 dark:group-[.is-assistant]:text-white",
       className,
     )}
     {...props}
@@ -65,7 +66,7 @@ export const MessageAction = ({
   <button
     aria-label={label || tooltip}
     className={cn(
-      "inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50",
+      `inline-flex items-center justify-center rounded-full border border-slate-900/10 p-2 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/10 ${tw.BG_SECONDARY} ${tw.TEXT_PRIMARY}`,
       className,
     )}
     title={tooltip}
@@ -84,7 +85,7 @@ export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
     <Streamdown
       className={cn(
-        "size-full break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_a]:text-cyan-400 [&_a]:underline [&_code]:rounded [&_code]:bg-black/20 [&_code]:px-1.5 [&_code]:py-0.5 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-black/30 [&_pre]:p-4",
+        "size-full break-words text-slate-950 dark:text-white [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_a]:text-cyan-800 dark:[&_a]:text-cyan-600 [&_a]:underline [&_code]:rounded [&_code]:bg-slate-900/10 dark:[&_code]:bg-black/20 [&_code]:px-1.5 [&_code]:py-0.5 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-slate-900/10 dark:[&_pre]:bg-black/30 [&_pre]:p-4",
         className,
       )}
       plugins={streamdownPlugins}

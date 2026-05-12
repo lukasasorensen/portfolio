@@ -8,6 +8,7 @@ import {
   PromptInputTextarea,
   type PromptInputMessage,
 } from "@/components/ai-elements/prompt-input";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import type { ChatStatus } from "ai";
 
 import { CHAT_PROMPT_MAX_LENGTH } from "./chat-config";
@@ -49,7 +50,7 @@ export function ChatPromptInput({
         />
       </PromptInputBody>
       <PromptInputFooter>
-        <p className="text-xs text-white/50">
+        <p className={`text-xs ${tw.TEXT_SECONDARY}`}>
           {input.length}/{CHAT_PROMPT_MAX_LENGTH}
         </p>
         <PromptInputSubmit disabled={!input.trim() && !isLoading} onStop={onStop} status={status} />

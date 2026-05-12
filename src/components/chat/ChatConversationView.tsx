@@ -1,5 +1,6 @@
 "use client";
 
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input";
 import type { ChatStatus, UIMessage } from "ai";
 import type { Ref } from "react";
@@ -43,14 +44,16 @@ export function ChatConversationView({
   onSubmit,
 }: ChatConversationViewProps) {
   return (
-    <div className="flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur">
-      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+    <div
+      className={`flex h-full min-h-[70vh] w-full flex-col overflow-hidden rounded-3xl border border-slate-900/10 ${tw.BG_SECONDARY} shadow-2xl dark:border-white/10`}
+    >
+      <div className="flex items-center justify-between gap-4 border-b border-slate-900/10 px-6 py-5 dark:border-white/10">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-cyan-400/80">AI Chat</p>
-          <h1 className="mt-2 text-2xl font-semibold text-white">Ask about Lukas</h1>
+          <p className={`text-xs font-medium uppercase tracking-[0.24em] ${tw.TEXT_SECONDARY}`}>AI Chat</p>
+          <h1 className={`mt-2 text-2xl font-semibold ${tw.TEXT_PRIMARY}`}>Ask about Lukas</h1>
         </div>
         <button
-          className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-white"
+          className={`rounded-full border border-slate-900/10 px-4 py-2 text-sm transition hover:bg-slate-900/5 dark:border-white/10 dark:hover:bg-white/5 ${tw.BTN_NONE}`}
           onClick={onNewChat}
           type="button"
         >
@@ -70,7 +73,7 @@ export function ChatConversationView({
         />
       </div>
 
-      <div className="border-t border-white/10 bg-slate-950/95 p-4">
+      <div className={`border-t border-slate-900/10 p-4 dark:border-white/10 ${tw.BG_PRIMARY}`}>
         <ChatPromptInput
           className="mx-auto w-full max-w-3xl"
           input={input}
@@ -82,7 +85,7 @@ export function ChatConversationView({
           status={status}
           textareaClassName="max-h-40 min-h-[3.25rem]"
         />
-        {hasError && <p className="mt-3 text-center text-sm text-red-400">Something went wrong. Please try again.</p>}
+        {hasError && <p className="mt-3 text-center text-sm text-red-500 dark:text-red-400">Something went wrong. Please try again.</p>}
       </div>
     </div>
   );

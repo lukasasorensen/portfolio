@@ -9,6 +9,7 @@ import {
   MessageToolbar,
 } from "@/components/ai-elements/message";
 import { Reasoning, ReasoningContent, ReasoningTrigger } from "@/components/ai-elements/reasoning";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { CopyIcon, RefreshCwIcon } from "lucide-react";
 import { Fragment } from "react";
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, type UIMessage } from "ai";
@@ -65,7 +66,7 @@ export function ChatMessage({
                   return (
                     <div className="w-full" key={`${message.id}-text-${index}`}>
                       {index === firstTextPartIndex && (
-                        <div className="bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-cyan-400/75">
+                        <div className={`bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] ${tw.TEXT_SECONDARY}`}>
                           Assistant
                         </div>
                       )}
@@ -105,7 +106,7 @@ export function ChatMessage({
         </MessageToolbar>
       )}
       {message.role === "assistant" && showActions && copyError && (
-        <p className="mt-2 text-xs text-red-400">{copyError}</p>
+        <p className="mt-2 text-xs text-red-500 dark:text-red-400">{copyError}</p>
       )}
     </Fragment>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import type { DynamicToolUIPart, ToolUIPart } from "ai";
@@ -15,7 +16,7 @@ export type ToolProps = ComponentProps<typeof Collapsible>;
 export const Tool = ({ className, ...props }: ToolProps) => (
   <Collapsible
     className={cn(
-      "not-prose group inline-flex max-w-full flex-col self-start overflow-hidden rounded-md border border-white/10 bg-white/[0.03] align-top data-[state=open]:w-full",
+      `not-prose group inline-flex max-w-full flex-col self-start overflow-hidden rounded-md border border-slate-900/10 align-top data-[state=open]:w-full dark:border-white/10 ${tw.BG_SECONDARY}`,
       className,
     )}
     {...props}
@@ -68,7 +69,7 @@ export const ToolHeader = ({ className, title, type, state, toolName, ...props }
 
   return (
     <CollapsibleTrigger
-      className={cn("flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left", className)}
+      className={cn(`flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left ${tw.TEXT_PRIMARY}`, className)}
       {...props}
     >
       <div className="flex w-full min-w-0 items-center gap-2">
@@ -86,7 +87,7 @@ export type ToolContentProps = ComponentProps<typeof CollapsibleContent>;
 export const ToolContent = ({ className, ...props }: ToolContentProps) => (
   <CollapsibleContent
     className={cn(
-      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 text-popover-foreground data-[state=closed]:animate-out data-[state=open]:animate-in space-y-4 border-t border-white/10 p-4 outline-none",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=open]:animate-in space-y-4 border-t border-slate-900/10 p-4 outline-none dark:border-white/10",
       className,
     )}
     {...props}
@@ -99,9 +100,9 @@ export type ToolInputProps = ComponentProps<"div"> & {
 
 export const ToolInput = ({ className, input, ...props }: ToolInputProps) => (
   <div className={cn("space-y-2 overflow-hidden", className)} {...props}>
-    <h4 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">Parameters</h4>
+    <h4 className={`text-xs font-medium uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>Parameters</h4>
     {!!input && (
-      <div className="bg-muted/50 rounded-md">
+      <div className="rounded-md bg-slate-900/5 dark:bg-black/20">
         <CodeBlock code={JSON.stringify(input, null, 2)} language="json" />
       </div>
     )}
@@ -128,13 +129,13 @@ export const ToolOutput = ({ className, output, errorText, ...props }: ToolOutpu
 
   return (
     <div className={cn("space-y-2", className)} {...props}>
-      <h4 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+      <h4 className={`text-xs font-medium uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
         {errorText ? "Error" : "Result"}
       </h4>
       <div
         className={cn(
           "overflow-x-auto rounded-md text-xs [&_table]:w-full",
-          errorText ? "bg-destructive/10 text-destructive" : "bg-muted/50 text-foreground",
+          errorText ? "bg-destructive/10 text-destructive" : `bg-slate-900/5 dark:bg-black/20 ${tw.TEXT_PRIMARY}`,
         )}
       >
         {errorText && <div>{errorText}</div>}

@@ -1,5 +1,6 @@
 "use client";
 
+import { TailWindColorThemeClasses as tw } from "@/constants/ColorTheme";
 import { cn } from "@/lib/utils";
 import type { ChatStatus, FileUIPart } from "ai";
 import { CornerDownLeftIcon, Loader2Icon, SquareIcon, XIcon } from "lucide-react";
@@ -42,7 +43,10 @@ export const PromptInput = ({ className, onSubmit, children, ...props }: PromptI
 
   return (
     <form
-      className={cn("rounded-3xl border border-white/10 bg-slate-950/80 p-3 shadow-lg", className)}
+      className={cn(
+        `rounded-3xl border border-slate-900/10 p-3 shadow-lg dark:border-white/10 ${tw.BG_SECONDARY}`,
+        className,
+      )}
       onSubmit={handleSubmit}
       {...props}
     >
@@ -85,7 +89,7 @@ export const PromptInputTextarea = ({
   return (
     <textarea
       className={cn(
-        "min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm text-white outline-none placeholder:text-white/40",
+        `min-h-[3.25rem] w-full resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-slate-950/40 dark:placeholder:text-white/40 ${tw.TEXT_PRIMARY}`,
         className,
       )}
       name={name}
@@ -100,7 +104,10 @@ export type PromptInputFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export const PromptInputFooter = ({ className, ...props }: PromptInputFooterProps) => (
   <div
-    className={cn("mt-2 flex items-center justify-between gap-3 border-t border-white/10 pt-3", className)}
+    className={cn(
+      "mt-2 flex items-center justify-between gap-3 border-t border-slate-900/10 pt-3 dark:border-white/10",
+      className,
+    )}
     {...props}
   />
 );
@@ -147,7 +154,7 @@ export const PromptInputSubmit = ({
     <button
       aria-label={isGenerating ? "Stop" : "Submit"}
       className={cn(
-        "inline-flex size-10 items-center justify-center rounded-full bg-violet-600 text-white transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-40",
+        `inline-flex size-10 items-center justify-center rounded-full transition disabled:cursor-not-allowed disabled:opacity-40 ${tw.BTN_PRIMARY}`,
         className,
       )}
       onClick={handleClick}
