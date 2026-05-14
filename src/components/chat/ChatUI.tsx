@@ -61,6 +61,7 @@ export default function ChatUI() {
   }
 
   function handleNewChat() {
+    stop();
     setMessages([]);
     setInput("");
     setCopyError(null);
