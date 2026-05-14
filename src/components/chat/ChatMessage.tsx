@@ -32,41 +32,50 @@ export function ChatMessage({
   onCopyResponse,
   onRegenerate,
 }: ChatMessageProps) {
+  const isRenderablePart = (part: UIMessage["parts"][number]) =>
+    isTextUIPart(part) || isReasoningUIPart(part) || isToolUIPart(part);
+
   const textParts = message.parts.filter(isTextUIPart);
-  const reasoningParts = message.parts.filter(isReasoningUIPart);
-  const contentParts = message.parts.filter((part) => isTextUIPart(part) || isToolUIPart(part));
 
   if (!hasRenderableMessageContent(message)) {
     return null;
   }
 
   const textContent = textParts.map((part) => part.text).join("\n\n");
-  const reasoningContent = reasoningParts
-    .map((part) => part.text)
-    .join("\n\n")
-    .trim();
-  const isReasoningStreaming = reasoningParts.some((part) => part.state === "streaming");
-  const firstTextPartIndex = contentParts.findIndex((part) => isTextUIPart(part));
+  const firstTextPartIndex = message.parts.findIndex(isTextUIPart);
   const showActions = isLatestAssistantMessage && textParts.length > 0;
 
   return (
     <Fragment>
       <Message from={message.role}>
         <MessageContent className={message.role === "assistant" ? "max-w-none space-y-4" : undefined}>
-          {message.role === "assistant" && reasoningContent && (
-            <Reasoning defaultOpen={false} isStreaming={isReasoningStreaming}>
-              <ReasoningTrigger />
-              <ReasoningContent>{reasoningContent}</ReasoningContent>
-            </Reasoning>
-          )}
           {message.role === "assistant" ? (
-            <div className="flex flex-wrap items-start gap-4">
-              {contentParts.map((part, index) => {
+            <div className="space-y-4">
+              {message.parts.map((part, index) => {
+                if (!isRenderablePart(part)) {
+                  return null;
+                }
+
+                const showAssistantLabel = isTextUIPart(part) && index === firstTextPartIndex;
+
+                if (isReasoningUIPart(part) && part.text.trim()) {
+                  return (
+                    <div className="w-full" key={`${message.id}-reasoning-${index}`}>
+                      <Reasoning isStreaming={part.state === "streaming"}>
+                        <ReasoningTrigger />
+                        <ReasoningContent>{part.text}</ReasoningContent>
+                      </Reasoning>
+                    </div>
+                  );
+                }
+
                 if (isTextUIPart(part)) {
                   return (
                     <div className="w-full" key={`${message.id}-text-${index}`}>
-                      {index === firstTextPartIndex && (
-                        <div className={`bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] ${tw.TEXT_SECONDARY}`}>
+                      {showAssistantLabel && (
+                        <div
+                          className={`bold mt-2 text-[11px] font-medium uppercase tracking-[0.22em] ${tw.TEXT_SECONDARY}`}
+                        >
                           Assistant
                         </div>
                       )}

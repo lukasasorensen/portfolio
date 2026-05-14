@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
     // Create a ReAct agent with all recruiter-facing tools
     const agent = createReactAgent({ llm: model, tools: [getResumeTool, getContactInfoTool, getBlogAndProjectsTool] });
 
-    const agentStream = await agent.stream({ messages: agentMessages }, { streamMode: ["values", "messages"] });
+    const agentStream = await agent.streamEvents({ messages: agentMessages }, { version: "v2" });
 
     return createUIMessageStreamResponse({
       stream: toUIMessageStream(agentStream),
