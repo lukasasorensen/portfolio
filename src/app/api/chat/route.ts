@@ -9,49 +9,31 @@ import { z } from "zod";
 import { RESUME } from "@/example-data/Resume";
 import Articles from "@/example-data/Articles";
 import Projects from "@/example-data/Projects";
+import { MAIN_RESUME_AI_SYSTEM_PROMPT } from "@/constants/system-prompts/MainResumeAISystemPrompt";
 
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
+const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
 
-const SYSTEM_PROMPT = `You are a sharp, knowledgeable AI assistant embedded in Lukas A Sorensen's portfolio website. \
-Your primary audience is recruiters and hiring managers evaluating Lukas as a candidate.
-
-About Lukas: He is a seasoned Full Stack Engineer with 10+ years of experience building production-grade web \
-applications, leading technical architecture, and mentoring engineering teams.
-
-Guidelines:
-- Be concise but persuasive. Lead with impact and business value, then back it up with technical specifics.
-- Highlight his technical breadth: frontend (React, Next.js, Vue, Angular), backend (Node.js, Express, MongoDB, \
-PostgreSQL, Redis), mobile (React Native/Expo), cloud (AWS), and tooling (Docker, CI/CD, Webpack, TypeScript).
-- Use the get_resume tool for any question about experience, work history, skills, accomplishments, or qualifications.
-- Use the get_contact_info tool when asked how to reach Lukas or for contact details.
-- Use the get_blog_and_projects tool for questions about portfolio work, technical writing, blog posts, or shipped projects.
-- Synthesize tool results into crisp, recruiter-friendly responses — avoid dumping raw data.
-- If asked something you cannot answer about Lukas, say so honestly and suggest reaching out via his contact info.`;
+const SYSTEM_PROMPT = MAIN_RESUME_AI_SYSTEM_PROMPT;
 
 // Tool: fetch resume data
-const getResumeTool = tool(
-  async () => JSON.stringify(RESUME, null, 2),
-  {
-    name: "get_resume",
-    description:
-      "Fetches Lukas A Sorensen's full resume including work experience, skills, education, and accomplishments. " +
-      "Use whenever the user asks about his background, career history, qualifications, technical skills, or anything professional.",
-    schema: z.object({}),
-  },
-);
+const getResumeTool = tool(async () => JSON.stringify(RESUME, null, 2), {
+  name: "get_resume",
+  description:
+    "Fetches Lukas A Sorensen's full resume including work experience, skills, education, and accomplishments. " +
+    "Use whenever the user asks about his background, career history, qualifications, technical skills, or anything professional.",
+  schema: z.object({}),
+});
 
 // Tool: fetch contact information
-const getContactInfoTool = tool(
-  async () => JSON.stringify(RESUME.contact, null, 2),
-  {
-    name: "get_contact_info",
-    description:
-      "Returns Lukas A Sorensen's contact information including email, website, GitHub, and LinkedIn. " +
-      "Use whenever the user asks how to reach Lukas or requests his contact details.",
-    schema: z.object({}),
-  },
-);
+const getContactInfoTool = tool(async () => JSON.stringify(RESUME.contact, null, 2), {
+  name: "get_contact_info",
+  description:
+    "Returns Lukas A Sorensen's contact information including email, website, GitHub, and LinkedIn. " +
+    "Use whenever the user asks how to reach Lukas or requests his contact details.",
+  schema: z.object({}),
+});
 
 // Tool: fetch blog posts and portfolio projects
 const getBlogAndProjectsTool = tool(
@@ -105,11 +87,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "LLM API key is not configured." }, { status: 500 });
     }
 
+    const modelName = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+    const supportsReasoning = REASONING_MODEL_PREFIXES.some((prefix) => modelName.startsWith(prefix));
+
     const model = new ChatOpenAI({
       openAIApiKey: apiKey,
-      modelName: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+      modelName,
       streaming: true,
-      temperature: 0.7,
+      ...(supportsReasoning
+        ? {
+            reasoning: {
+              effort: "medium",
+              summary: "auto",
+            },
+          }
+        : {
+            temperature: 0.7,
+          }),
     });
 
     // Convert UIMessages to LangChain BaseMessages
@@ -119,10 +113,7 @@ export async function POST(req: NextRequest) {
     // Create a ReAct agent with all recruiter-facing tools
     const agent = createReactAgent({ llm: model, tools: [getResumeTool, getContactInfoTool, getBlogAndProjectsTool] });
 
-    const agentStream = await agent.stream(
-      { messages: agentMessages },
-      { streamMode: ["values", "messages"] },
-    );
+    const agentStream = await agent.streamEvents({ messages: agentMessages }, { version: "v2" });
 
     return createUIMessageStreamResponse({
       stream: toUIMessageStream(agentStream),

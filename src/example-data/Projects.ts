@@ -15,6 +15,30 @@ export interface IProject {
 
 const Projects: IProject[] = [
   {
+    id: "digideck-ai-assistant",
+    title: "DIGIDECK AI Assistant",
+    shortDescription:
+      "Agentic presentation workflows and MCP tools for governed deck creation inside DIGIDECK and external AI clients.",
+    description: `At Sportsdigita, I led architecture and implementation work on the DIGIDECK AI Assistant orchestration layer that powers guided presentation generation, in-editor AI assistance, and DIGIDECK's MCP integration for Claude, ChatGPT, Copilot, and similar clients. The platform helps teams turn prompts into polished presentations using approved master deck content, so AI-driven personalization stays on-brand and governed instead of relying on disconnected public AI output. \n\nUsing Typescript, Node.js, Express, Socket.IO, OpenAI, and the Model Context Protocol, I built workflows for generating presentation outlines, creating presentations from those outlines, and supporting editor-side chat that can inspect slides and make targeted content or layout updates through tool calls. I also extended the MCP server with OAuth-protected tools and documentation resources for decks, slides, and components, while adding admin test harness screens, workflow run recording, audit logging, and OpenTelemetry instrumentation so the team could ship AI features with stronger observability, security, and developer feedback loops.`,
+    linkUrl: "https://www.thedigideck.com/ai/",
+    skillsUsed: [
+      "OpenAI",
+      "Claude",
+      "Ollama",
+      "Langchain",
+      "Typescript",
+      "NodeJS",
+      "Model Context Protocol (MCP)",
+      "Agentic AI Orchestration",
+      "Redis",
+      "MongoDB",
+    ],
+    company: "Sportsdigita",
+    createdDate: new Date("2026-5-1"),
+    imageSrc: "/images/AI_PROJECT_1.png",
+    detailImages: [{ src: "/images/AI_PROJECT_1.png" }],
+  },
+  {
     id: "digideck-components",
     title: "DIGIDECK Components",
     description: `The goal of this project was to architect a way for any developer internally or externally to create a DIGIDECK Presentation Plugin, which is a modular part of the presentation content such as: images, videos, icons, arrows, and anything else you wish to create. During this project I led junior developers in creating an in-house Javascript Framework that extended the Custom Web Component API. \n\nA CLI was created to bootstrap a new DIGIDECK Plugin App. Developers then use the digideckCORE API to interact directly with the DIGIDECK presentation. Because the plugins are self-contained apps, presentation plugins are tree-shakeable which reduced the size of presentations. All APIs were documented on a Docusaurus documentation site complete with Algolia fuzzy searching for faster development.`,
