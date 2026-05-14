@@ -98,16 +98,36 @@ export type ToolInputProps = ComponentProps<"div"> & {
   input: ToolPart["input"];
 };
 
-export const ToolInput = ({ className, input, ...props }: ToolInputProps) => (
-  <div className={cn("space-y-2 overflow-hidden", className)} {...props}>
-    <h4 className={`text-xs font-medium uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>Parameters</h4>
-    {!!input && (
+const hasVisibleToolInput = (input: ToolPart["input"]) => {
+  if (input == null || input === "") {
+    return false;
+  }
+
+  if (Array.isArray(input)) {
+    return input.length > 0;
+  }
+
+  if (typeof input === "object") {
+    return Object.keys(input).length > 0;
+  }
+
+  return true;
+};
+
+export const ToolInput = ({ className, input, ...props }: ToolInputProps) => {
+  if (!hasVisibleToolInput(input)) {
+    return null;
+  }
+
+  return (
+    <div className={cn("space-y-2 overflow-hidden", className)} {...props}>
+      <h4 className={`text-xs font-medium uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>Parameters</h4>
       <div className="rounded-md bg-slate-900/5 dark:bg-black/20">
         <CodeBlock code={JSON.stringify(input, null, 2)} language="json" />
       </div>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 export type ToolOutputProps = ComponentProps<"div"> & {
   output: ToolPart["output"];
