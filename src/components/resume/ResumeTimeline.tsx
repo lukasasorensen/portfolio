@@ -16,29 +16,26 @@ export default function ResumeTimeline() {
           <div className="relative col-span-12 space-y-6 sm:col-span-9 md:px-4">
             <div className="relative col-span-12 space-y-12 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:-left-3 sm:before:bottom-0 sm:before:top-2 sm:before:w-0.5 md:px-4 before:dark:bg-gray-300">
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
-                <h3 className="text-xl font-semibold tracking-wide">Sportsdigita - Senior Full Stack Engineer (AI + Platform)</h3>
+                <h3 className="text-xl font-semibold tracking-wide">Sportsdigita - Lead Engineer & Architect</h3>
                 <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>OCTOBER 2022 - PRESENT</time>
                 <ul className="mt-3 list-disc">
                   <li className="mt-3">
-                    Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled workflows that
-                    reduced large multi-slide edits from hours/days to minutes.
+                    Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled{" "}
+                    <strong>Agentic Workflows</strong> that enabled users to automate large updates to Master Decks over
+                    hundreds of slides reducing effort by 70 - 90%.
                   </li>
                   <li className="mt-3">
-                    Designed domain-aware AI flows that use approved DIGIDECK data and directly interact with the
-                    presentation editor for outlines, slide updates, and targeted tool calls.
+                    Integrated and engineered <strong>AI Skills</strong> and Tools with{" "}
+                    <strong>Claude, Cursor, OpenAI, and Rovo</strong> to increase producitivity and output of the
+                    Engineering team by 20-40% through automated code reviews, code generation, and security monitering.
                   </li>
                   <li className="mt-3">
-                    Integrated Claude, OpenAI, and local Ollama models through LangChain and MCP with stronger
-                    observability, governance, and operational controls.
-                  </li>
-                  <li className="mt-3">Owned end-to-end system design and delivery across AI services, editor integrations, and platform APIs.</li>
-                  <li className="mt-3">
-                    Mentored engineers through architecture feedback and high-quality code reviews while partnering
-                    cross-functionally with product and UX.
+                    Maintained and hardened core DIGIDECK platform systems by delivering security updates and new
+                    product features to the main platform with techonologies
                   </li>
                   <li className="mt-3">
-                    Maintained and hardened core DIGIDECK platform systems while delivering security updates and new
-                    production features.
+                    Continued to implement new product features for DIGIDECK using:{" "}
+                    <strong>Typescript, React, Angular, NodeJS, MongoDB, and Redis</strong>
                   </li>
                 </ul>
               </div>
@@ -49,16 +46,20 @@ export default function ResumeTimeline() {
                 </time>
                 <ul className="mt-3 list-disc">
                   <li className="mt-3">
-                    Built and scaled enterprise DIGIDECK features across frontend/backend using Angular, Vue, NodeJS,
-                    MongoDB, and SQL.
+                    Delivered product updates and new features to the DIGIDECK Presentation platform on both the{" "}
+                    <strong>AngularJS</strong> frontend and <strong>NodeJS, Express & MongoDB</strong> backend.
                   </li>
                   <li className="mt-3">
-                    Delivered and maintained REST APIs and key third-party integrations including Salesforce, Canva,
-                    Twilio, Bynder, HubSpot, and Zapier.
+                    Followed <strong>Scrum & Agile</strong> methodologies and participated in regular sprint ceremonies
+                    while collaborating with cross-functional teams to deliver high-quality software on time.
                   </li>
                   <li className="mt-3">
-                    Led modernization efforts on legacy systems and engineering workflows to improve maintainability
-                    and team velocity.
+                    Fixed bugs and implemented security updates to maintain the integrity and reliability of the
+                    DIGIDECK platform while ensuring a &gt;99.99% uptime for users.
+                  </li>
+                  <li className="mt-3">
+                    Developed and maintained CI/CD pipelines and <strong>AWS</strong> deployment workflows to support
+                    reliable production releases and efficient development processes.
                   </li>
                 </ul>
               </div>
