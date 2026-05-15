@@ -37,11 +37,12 @@ export default function Resume() {
     <main className={`flex min-h-screen flex-col items-center justify-around ${tw.BG_PRIMARY} px-8 py-8 md:px-24`}>
       <div className="flex max-w-screen-lg flex-col items-center">
         <div className="flex flex-col items-center gap-5">
+          <h1 className={`mt-6 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>My Resume</h1>
           <button
             type="button"
             onClick={handleDownloadResume}
             disabled={isGeneratingPdf}
-            className={`absolute right-4 top-14 rounded-md bg-violet-600 px-4 py-2 text-xs font-semibold ${tw.TEXT_PRIMARY} hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-70`}
+            className={`mb-2 mt-2 rounded-md bg-cyan-600 px-4 py-2 text-xs font-semibold dark:bg-violet-600 ${tw.TEXT_PRIMARY} hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-70`}
           >
             {isGeneratingPdf ? (
               <span className="flex items-center gap-2">
@@ -55,7 +56,6 @@ export default function Resume() {
               </span>
             )}
           </button>
-          <h1 className={`mt-6 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>My Resume</h1>
           <div className="max-w-screen-md text-left">
             <p className="mt-2">
               Lukas Sorensen is a Lead Engineer / Systems Architect with 10+ years of experience delivering production
