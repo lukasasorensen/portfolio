@@ -87,7 +87,11 @@ const getClientIp = (request: NextRequest) => {
 
 const getDeviceIdFromRequest = (request: NextRequest) => {
   const headerValue = request.headers.get("x-device-id")?.trim();
-  if (!headerValue || headerValue.length > MAX_DEVICE_ID_LENGTH || !/^[a-zA-Z0-9-]+$/.test(headerValue)) {
+  if (
+    !headerValue ||
+    headerValue.length > MAX_DEVICE_ID_LENGTH ||
+    !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(headerValue)
+  ) {
     return null;
   }
 
@@ -124,7 +128,8 @@ const incrementDayCounter = (key: string, dayKey: string): DayCounter => {
 
 const getSecondsUntilNextUtcDay = (now: Date) => {
   const nextDay = new Date(now);
-  nextDay.setUTCHours(24, 0, 0, 0);
+  nextDay.setUTCDate(nextDay.getUTCDate() + 1);
+  nextDay.setUTCHours(0, 0, 0, 0);
   return Math.max(1, Math.ceil((nextDay.getTime() - now.getTime()) / 1000));
 };
 
@@ -276,7 +281,7 @@ export async function POST(req: NextRequest) {
 
     if (!clientIp && !deviceId) {
       return NextResponse.json(
-        { error: "Missing identifying information. Please enable headers and try again." },
+        { error: "Unable to process request due to missing client information." },
         { status: 400 },
       );
     }

@@ -15,7 +15,12 @@ const createDeviceId = () => {
     return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
   }
 
-  return `device-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+  const host =
+    typeof window !== "undefined"
+      ? window.location.hostname.replace(/[^a-zA-Z0-9]/g, "").toLowerCase() || "unknownhost"
+      : "server";
+
+  return `device-${host}-${Date.now().toString(36)}`;
 };
 
 const getOrCreateDeviceId = () => {
