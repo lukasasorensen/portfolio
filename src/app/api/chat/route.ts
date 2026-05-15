@@ -79,7 +79,7 @@ const getClientIp = (request: NextRequest) => {
 
 const getDeviceIdFromRequest = (request: NextRequest) => {
   const headerValue = request.headers.get("x-device-id")?.trim();
-  if (!headerValue || headerValue.length > 128 || !/^[a-zA-Z0-9_-]+$/.test(headerValue)) {
+  if (!headerValue || headerValue.length > 128 || !/^[a-zA-Z0-9-]+$/.test(headerValue)) {
     return null;
   }
 
@@ -244,6 +244,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Access denied for this device." }, { status: 403 });
     }
 
+    if (!clientIp && !deviceId) {
+      return NextResponse.json(
+        { error: "Missing identifying information. Please enable headers and try again." },
+        { status: 400 },
+      );
+    }
+
     const identityKeys = new Set<string>();
     if (clientIp) {
       identityKeys.add(`ip:${clientIp}`);
@@ -253,9 +260,6 @@ export async function POST(req: NextRequest) {
     }
     if (clientIp && deviceId) {
       identityKeys.add(`pair:${clientIp}:${deviceId}`);
-    }
-    if (identityKeys.size === 0) {
-      identityKeys.add("anonymous");
     }
 
     for (const key of identityKeys) {
