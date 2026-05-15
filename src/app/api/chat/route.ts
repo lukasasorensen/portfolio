@@ -21,6 +21,7 @@ const DEFAULT_BURST_MAX_REQUESTS = 10;
 const DEFAULT_DAILY_MAX_REQUESTS = 100;
 const MAX_DEVICE_ID_LENGTH = 128;
 const COUNTER_CLEANUP_INTERVAL = 200;
+const DEVICE_ID_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
 
 const SYSTEM_PROMPT = MAIN_RESUME_AI_SYSTEM_PROMPT;
 
@@ -63,6 +64,14 @@ const parsePositiveIntegerEnv = (value: string | undefined, fallback: number) =>
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 };
 
+const RATE_LIMIT_CONFIG = {
+  bannedDeviceIds: parseCsvEnvToSet(process.env.CHAT_BANNED_DEVICE_IDS),
+  bannedIps: parseCsvEnvToSet(process.env.CHAT_BANNED_IPS),
+  burstMaxRequests: parsePositiveIntegerEnv(process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_WINDOW, DEFAULT_BURST_MAX_REQUESTS),
+  burstWindowMs: parsePositiveIntegerEnv(process.env.CHAT_RATE_LIMIT_WINDOW_MS, DEFAULT_BURST_WINDOW_MS),
+  dailyMaxRequests: parsePositiveIntegerEnv(process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_DAY, DEFAULT_DAILY_MAX_REQUESTS),
+};
+
 const getClientIp = (request: NextRequest) => {
   const forwardedFor = request.headers.get("x-forwarded-for");
   if (forwardedFor) {
@@ -90,7 +99,7 @@ const getDeviceIdFromRequest = (request: NextRequest) => {
   if (
     !headerValue ||
     headerValue.length > MAX_DEVICE_ID_LENGTH ||
-    !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(headerValue)
+    !DEVICE_ID_PATTERN.test(headerValue)
   ) {
     return null;
   }
@@ -257,31 +266,20 @@ export async function POST(req: NextRequest) {
     const nowMs = now.getTime();
     const dayKey = now.toISOString().slice(0, 10);
     cleanupExpiredCounters(nowMs, dayKey);
-    const burstWindowMs = parsePositiveIntegerEnv(process.env.CHAT_RATE_LIMIT_WINDOW_MS, DEFAULT_BURST_WINDOW_MS);
-    const burstMaxRequests = parsePositiveIntegerEnv(
-      process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_WINDOW,
-      DEFAULT_BURST_MAX_REQUESTS,
-    );
-    const dailyMaxRequests = parsePositiveIntegerEnv(
-      process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_DAY,
-      DEFAULT_DAILY_MAX_REQUESTS,
-    );
-    const bannedIps = parseCsvEnvToSet(process.env.CHAT_BANNED_IPS);
-    const bannedDeviceIds = parseCsvEnvToSet(process.env.CHAT_BANNED_DEVICE_IDS);
     const clientIp = getClientIp(req);
     const deviceId = getDeviceIdFromRequest(req);
 
-    if (clientIp && bannedIps.has(clientIp)) {
+    if (clientIp && RATE_LIMIT_CONFIG.bannedIps.has(clientIp)) {
       return NextResponse.json({ error: "Access denied for this IP address." }, { status: 403 });
     }
 
-    if (deviceId && bannedDeviceIds.has(deviceId)) {
+    if (deviceId && RATE_LIMIT_CONFIG.bannedDeviceIds.has(deviceId)) {
       return NextResponse.json({ error: "Access denied for this device." }, { status: 403 });
     }
 
     if (!clientIp && !deviceId) {
       return NextResponse.json(
-        { error: "Unable to process request due to missing client information." },
+        { error: "Request rejected: no client IP or device identifier could be determined." },
         { status: 400 },
       );
     }
@@ -298,8 +296,8 @@ export async function POST(req: NextRequest) {
     }
 
     for (const key of identityKeys) {
-      const burstCounter = incrementBurstCounter(key, nowMs, burstWindowMs);
-      if (burstCounter.count > burstMaxRequests) {
+      const burstCounter = incrementBurstCounter(key, nowMs, RATE_LIMIT_CONFIG.burstWindowMs);
+      if (burstCounter.count > RATE_LIMIT_CONFIG.burstMaxRequests) {
         const retryAfterSeconds = Math.max(1, Math.ceil((burstCounter.resetAt - nowMs) / 1000));
         return NextResponse.json(
           {
@@ -313,7 +311,7 @@ export async function POST(req: NextRequest) {
       }
 
       const dayCounter = incrementDayCounter(key, dayKey);
-      if (dayCounter.count > dailyMaxRequests) {
+      if (dayCounter.count > RATE_LIMIT_CONFIG.dailyMaxRequests) {
         return NextResponse.json(
           {
             error: "Daily usage limit reached. Please try again tomorrow.",

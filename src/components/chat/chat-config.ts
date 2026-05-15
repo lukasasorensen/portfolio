@@ -20,7 +20,7 @@ const createDeviceId = () => {
       ? window.location.hostname.replace(/[^a-zA-Z0-9]/g, "").toLowerCase() || "unknownhost"
       : "server";
 
-  return `device-${host}-${Date.now().toString(36)}`;
+  return `device-${host}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 };
 
 const getOrCreateDeviceId = () => {
