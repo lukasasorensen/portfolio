@@ -85,18 +85,18 @@ export default class PdfService {
     const writeBullet = (text: string) => {
       const bulletIndent = 10;
       const bulletMarkerX = PAGE_MARGIN + 2;
-      const lineHeight = 11 * 1.35;
-      const lines = toLines(pdf.splitTextToSize(normalizeText(text), contentWidth - bulletIndent - PAGE_MARGIN));
+      const lineHeight = 10 * 1.4;
+      const lines = toLines(pdf.splitTextToSize(normalizeText(text), contentWidth - bulletIndent));
 
       ensureSpace(lines.length * lineHeight);
 
       pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(11);
+      pdf.setFontSize(10);
       pdf.setTextColor(...BODY_TEXT_COLOR);
       pdf.text(">", bulletMarkerX, cursorY);
       pdf.text(lines, PAGE_MARGIN + bulletIndent, cursorY);
 
-      cursorY += lines.length * lineHeight + 4;
+      cursorY += lines.length * lineHeight + 1.4;
     };
 
     const writeExperience = () => {
@@ -120,7 +120,7 @@ export default class PdfService {
           writeBullet(highlight);
         }
 
-        cursorY += 6;
+        cursorY += 22;
       }
     };
 
@@ -142,17 +142,18 @@ export default class PdfService {
           style: "bold",
         });
         writeText(project.description, {
-          gapAfter: 4,
+          gapAfter: -2,
+          size: 10,
         });
         writeText(`Skills: ${project.skills.join(", ")}`, {
           color: MUTED_TEXT_COLOR,
-          gapAfter: 3,
-          size: 10,
+          gapAfter: 1,
+          size: 9,
         });
         writeText(`Link: ${project.link}`, {
           color: MUTED_TEXT_COLOR,
-          gapAfter: 8,
-          size: 10,
+          gapAfter: 11,
+          size: 9,
         });
       }
     };
