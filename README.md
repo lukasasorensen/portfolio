@@ -20,6 +20,11 @@ cp .env.example .env.local
 |---|---|---|
 | `OPENAI_API_KEY` | ✅ Yes | Your OpenAI API key (used by the `/chat` AI feature) |
 | `OPENAI_MODEL` | No | OpenAI model to use (defaults to `gpt-4o-mini`) |
+| `CHAT_RATE_LIMIT_WINDOW_MS` | No | Rolling window duration in ms for burst throttling (defaults to `60000`) |
+| `CHAT_RATE_LIMIT_MAX_REQUESTS_PER_WINDOW` | No | Max chat requests allowed per identity in each burst window (defaults to `10`) |
+| `CHAT_RATE_LIMIT_MAX_REQUESTS_PER_DAY` | No | Max chat requests allowed per identity per UTC day (defaults to `100`) |
+| `CHAT_BANNED_IPS` | No | Comma-separated IP blocklist for `/api/chat` |
+| `CHAT_BANNED_DEVICE_IDS` | No | Comma-separated device ID blocklist for `/api/chat` |
 
 > **Note:** The `/chat` page will show an error if `OPENAI_API_KEY` is not set.
 
@@ -51,6 +56,7 @@ The easiest way to deploy is with the [Vercel Platform](https://vercel.com/new?u
 1. Go to your project in the Vercel dashboard → **Settings → Environment Variables**
 2. Add `OPENAI_API_KEY` with your OpenAI API key
 3. Optionally add `OPENAI_MODEL` to override the default model
+4. Optionally add the `CHAT_RATE_LIMIT_*` and `CHAT_BANNED_*` variables to tune chat abuse controls
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
