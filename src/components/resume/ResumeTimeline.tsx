@@ -14,14 +14,12 @@ function renderHighlight(highlight: string) {
 export default function ResumeTimeline() {
   return (
     <section className={`${tw.BG_PRIMARY}`}>
-      <div className="container mx-auto max-w-5xl py-12 md:px-4">
+      <div className="container mx-auto max-w-5xl py-5 md:px-4">
         <div className="mx-4 grid gap-4 sm:grid-cols-12">
           <div className="col-span-12 sm:col-span-3">
             <div className="mb-14 text-center before:mx-auto before:mb-5 before:block before:h-3 before:w-24 before:rounded-md sm:text-left sm:before:mx-0 before:dark:bg-violet-600">
               <h3 className="text-3xl font-semibold">{RESUME.name}</h3>
-              <span className={`text-sm font-bold uppercase tracking-wider ${tw.TEXT_SECONDARY}`}>
-                {RESUME.title}
-              </span>
+              <span className={`text-sm font-bold uppercase tracking-wider ${tw.TEXT_SECONDARY}`}>{RESUME.title}</span>
             </div>
           </div>
           <div className="relative col-span-12 space-y-6 sm:col-span-9 md:px-4">
