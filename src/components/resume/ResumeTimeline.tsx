@@ -39,7 +39,7 @@ export default function ResumeTimeline() {
                 </ul>
               </div>
               <div className="flex flex-col sm:relative sm:before:absolute sm:before:left-[-35px] sm:before:top-2 sm:before:z-[1] sm:before:h-4 sm:before:w-4 sm:before:rounded-full before:dark:bg-violet-600">
-                <h3 className="text-xl font-semibold tracking-wide">SportsDigita - Full Stack Engineer</h3>
+                <h3 className="text-xl font-semibold tracking-wide">Sportsdigita - Full Stack Engineer</h3>
                 <time className={`text-xs uppercase tracking-wide ${tw.TEXT_SECONDARY}`}>
                   NOVEMBER 2018 - OCTOBER 2022
                 </time>

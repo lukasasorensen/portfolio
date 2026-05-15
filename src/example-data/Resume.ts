@@ -23,7 +23,7 @@ export const RESUME = {
       ],
     },
     {
-      company: "SportsDigita",
+      company: "Sportsdigita",
       title: "Full Stack Engineer",
       period: "November 2018 – October 2022",
       highlights: [
