@@ -16,6 +16,9 @@ import {
 const MAX_INPUT_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 const REASONING_MODEL_PREFIXES = ["o1", "o3", "gpt-5"];
+const DEFAULT_BURST_WINDOW_MS = 60_000;
+const DEFAULT_BURST_MAX_REQUESTS = 10;
+const DEFAULT_DAILY_MAX_REQUESTS = 100;
 
 const SYSTEM_PROMPT = MAIN_RESUME_AI_SYSTEM_PROMPT;
 
@@ -24,6 +27,97 @@ type StreamEvent = {
   event?: string;
   name?: string;
   run_id?: string;
+};
+
+type WindowCounter = {
+  count: number;
+  resetAt: number;
+};
+
+type DayCounter = {
+  count: number;
+  day: string;
+};
+
+const burstRequestCounters = new Map<string, WindowCounter>();
+const dailyRequestCounters = new Map<string, DayCounter>();
+
+const parseCsvEnvToSet = (value?: string) =>
+  new Set(
+    (value ?? "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean),
+  );
+
+const parsePositiveIntegerEnv = (value: string | undefined, fallback: number) => {
+  const parsed = Number.parseInt(value ?? "", 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const getClientIp = (request: NextRequest) => {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    const firstIp = forwardedFor.split(",")[0]?.trim();
+    if (firstIp) {
+      return firstIp;
+    }
+  }
+
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) {
+    return realIp;
+  }
+
+  const cfIp = request.headers.get("cf-connecting-ip")?.trim();
+  if (cfIp) {
+    return cfIp;
+  }
+
+  return null;
+};
+
+const getDeviceIdFromRequest = (request: NextRequest) => {
+  const headerValue = request.headers.get("x-device-id")?.trim();
+  if (!headerValue || headerValue.length > 128 || !/^[a-zA-Z0-9_-]+$/.test(headerValue)) {
+    return null;
+  }
+
+  return headerValue;
+};
+
+const incrementBurstCounter = (key: string, nowMs: number, windowMs: number): WindowCounter => {
+  const current = burstRequestCounters.get(key);
+
+  if (!current || current.resetAt <= nowMs) {
+    const next = { count: 1, resetAt: nowMs + windowMs };
+    burstRequestCounters.set(key, next);
+    return next;
+  }
+
+  const next = { ...current, count: current.count + 1 };
+  burstRequestCounters.set(key, next);
+  return next;
+};
+
+const incrementDayCounter = (key: string, dayKey: string): DayCounter => {
+  const current = dailyRequestCounters.get(key);
+
+  if (!current || current.day !== dayKey) {
+    const next = { count: 1, day: dayKey };
+    dailyRequestCounters.set(key, next);
+    return next;
+  }
+
+  const next = { ...current, count: current.count + 1 };
+  dailyRequestCounters.set(key, next);
+  return next;
+};
+
+const getSecondsUntilNextUtcDay = (now: Date) => {
+  const nextDay = new Date(now);
+  nextDay.setUTCHours(24, 0, 0, 0);
+  return Math.max(1, Math.ceil((nextDay.getTime() - now.getTime()) / 1000));
 };
 
 const normalizeToolInputs = (messages: UIMessage[]): UIMessage[] =>
@@ -125,6 +219,74 @@ const extractTextFromChunk = (chunk: Record<string, unknown>) => {
 
 export async function POST(req: NextRequest) {
   try {
+    const now = new Date();
+    const nowMs = now.getTime();
+    const dayKey = now.toISOString().slice(0, 10);
+    const burstWindowMs = parsePositiveIntegerEnv(process.env.CHAT_RATE_LIMIT_WINDOW_MS, DEFAULT_BURST_WINDOW_MS);
+    const burstMaxRequests = parsePositiveIntegerEnv(
+      process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_WINDOW,
+      DEFAULT_BURST_MAX_REQUESTS,
+    );
+    const dailyMaxRequests = parsePositiveIntegerEnv(
+      process.env.CHAT_RATE_LIMIT_MAX_REQUESTS_PER_DAY,
+      DEFAULT_DAILY_MAX_REQUESTS,
+    );
+    const bannedIps = parseCsvEnvToSet(process.env.CHAT_BANNED_IPS);
+    const bannedDeviceIds = parseCsvEnvToSet(process.env.CHAT_BANNED_DEVICE_IDS);
+    const clientIp = getClientIp(req);
+    const deviceId = getDeviceIdFromRequest(req);
+
+    if (clientIp && bannedIps.has(clientIp)) {
+      return NextResponse.json({ error: "Access denied for this IP address." }, { status: 403 });
+    }
+
+    if (deviceId && bannedDeviceIds.has(deviceId)) {
+      return NextResponse.json({ error: "Access denied for this device." }, { status: 403 });
+    }
+
+    const identityKeys = new Set<string>();
+    if (clientIp) {
+      identityKeys.add(`ip:${clientIp}`);
+    }
+    if (deviceId) {
+      identityKeys.add(`device:${deviceId}`);
+    }
+    if (clientIp && deviceId) {
+      identityKeys.add(`pair:${clientIp}:${deviceId}`);
+    }
+    if (identityKeys.size === 0) {
+      identityKeys.add("anonymous");
+    }
+
+    for (const key of identityKeys) {
+      const burstCounter = incrementBurstCounter(key, nowMs, burstWindowMs);
+      if (burstCounter.count > burstMaxRequests) {
+        const retryAfterSeconds = Math.max(1, Math.ceil((burstCounter.resetAt - nowMs) / 1000));
+        return NextResponse.json(
+          {
+            error: "Too many requests in a short period. Please wait and try again.",
+          },
+          {
+            headers: { "Retry-After": String(retryAfterSeconds) },
+            status: 429,
+          },
+        );
+      }
+
+      const dayCounter = incrementDayCounter(key, dayKey);
+      if (dayCounter.count > dailyMaxRequests) {
+        return NextResponse.json(
+          {
+            error: "Daily usage limit reached. Please try again tomorrow.",
+          },
+          {
+            headers: { "Retry-After": String(getSecondsUntilNextUtcDay(now)) },
+            status: 429,
+          },
+        );
+      }
+    }
+
     const body = await req.json();
     const uiMessages: UIMessage[] = body.messages ?? [];
 
