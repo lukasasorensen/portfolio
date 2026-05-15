@@ -13,13 +13,13 @@ export default function Resume() {
           Lukas Sorensen is a Lead Engineer / Systems Architect with 10+ years of experience delivering production
           software and a 50/50 focus on AI systems and full-stack engineering.
         </p>
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className={`mb-8 rounded-md px-4 py-2 font-semibold ${tw.TEXT_PRIMARY} bg-violet-600 hover:bg-violet-700`}
+        <a
+          href="/Lukas_A_Sorensen_Resume.pdf"
+          download
+          className={`mb-8 rounded-md bg-violet-600 px-4 py-2 font-semibold ${tw.TEXT_PRIMARY} hover:bg-violet-700`}
         >
           Download Resume as PDF
-        </button>
+        </a>
         <ResumeTimeline />
       </div>
     </main>

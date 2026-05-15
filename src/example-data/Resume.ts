@@ -19,7 +19,7 @@ export const RESUME = {
         "Designed domain-aware AI flows that use approved DIGIDECK content and directly interact with the presentation editor for outline generation, slide updates, and targeted layout/content tool calls.",
         "Integrated Claude, OpenAI, and local Ollama-backed models through LangChain/MCP orchestration with auditability, observability, and secure operational controls.",
         "Owned system design and delivery across AI services, editor integrations, and platform APIs while partnering with product and UX on roadmap execution.",
-        "Mentored engineers through architecture reviews, design feedback, and high-signal code reviews to improve delivery quality and velocity.",
+        "Mentored engineers through architecture reviews, design feedback, and high-quality code reviews to improve delivery quality and velocity.",
       ],
     },
     {

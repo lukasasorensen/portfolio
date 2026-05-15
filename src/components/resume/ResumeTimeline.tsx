@@ -33,7 +33,7 @@ export default function ResumeTimeline() {
                   </li>
                   <li className="mt-3">Owned end-to-end system design and delivery across AI services, editor integrations, and platform APIs.</li>
                   <li className="mt-3">
-                    Mentored engineers through architecture feedback and high-signal code reviews while partnering
+                    Mentored engineers through architecture feedback and high-quality code reviews while partnering
                     cross-functionally with product and UX.
                   </li>
                 </ul>
