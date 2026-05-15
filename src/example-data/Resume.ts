@@ -1,8 +1,8 @@
 export const RESUME = {
   name: "Lukas A Sorensen",
-  title: "Lead Engineer / Systems Architect",
+  title: "Full Stack Web Developer / Systems Architect / AI Engineer",
   summary:
-    "Lead Engineer and Systems Architect with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus is a 50/50 blend of AI systems and full-stack engineering, including architecting the DIGIDECK AI Assistant that integrates domain-specific deck data with in-editor tooling to turn large slide updates from hours or days into minutes.",
+    "Lead Engineer and Systems Architect with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering, including architecting the DIGIDECK AI Assistant that integrates domain-specific deck data with in-editor tooling to turn large slide updates from hours or days into minutes.",
   contact: {
     email: "lukasasorensen@gmail.com",
     website: "https://lukasasorensen.com",
