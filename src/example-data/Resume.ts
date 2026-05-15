@@ -1,6 +1,6 @@
 export const RESUME = {
-  name: "Lukas A Sorensen",
-  title: "Full Stack Web Developer / Systems Architect / AI Engineer",
+  name: "Lukas Sorensen",
+  title: "Lead Engineer / Systems Architect",
   summary:
     "Lead Engineer and Systems Architect with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering, including architecting the DIGIDECK AI Assistant that integrates domain-specific deck data with in-editor tooling to turn large slide updates from hours or days into minutes.",
   contact: {
@@ -12,30 +12,30 @@ export const RESUME = {
   experience: [
     {
       company: "Sportsdigita",
-      title: "Senior Full Stack Engineer (AI + Platform)",
-      period: "October 2022 – Present",
+      title: "Lead Engineer & Architect",
+      period: "October 2022 - Present",
       highlights: [
-        "Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled workflows that let users make broad, governed presentation edits in minutes instead of hours or days.",
-        "Designed domain-aware AI flows that use approved DIGIDECK content and directly interact with the presentation editor for outline generation, slide updates, and targeted layout/content tool calls.",
-        "Integrated Claude, OpenAI, and local Ollama-backed models through LangChain/MCP orchestration with auditability, observability, and secure operational controls.",
-        "Owned system design and delivery across AI services, editor integrations, and platform APIs while partnering with product and UX on roadmap execution.",
-        "Mentored engineers through architecture reviews, design feedback, and high-quality code reviews to improve delivery quality and velocity.",
+        "Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled **Agentic Workflows** that enabled users to automate large updates to Master Decks over hundreds of slides, reducing effort by 70-90%.",
+        "Integrated and engineered **AI Skills** and Tools with **Claude, Cursor, OpenAI, and Rovo** to increase productivity and output of the engineering team by 20-40% through automated code reviews, code generation, and security monitoring.",
+        "Maintained and hardened core DIGIDECK platform systems by delivering security updates and new product features to the main platform.",
+        "Continued to implement new product features for DIGIDECK using **TypeScript, React, Angular, NodeJS, MongoDB, and Redis**.",
       ],
     },
     {
       company: "Sportsdigita",
       title: "Full Stack Engineer",
-      period: "November 2018 – October 2022",
+      period: "November 2018 - October 2022",
       highlights: [
-        "Built and scaled enterprise DIGIDECK features across frontend and backend using Angular, Vue, NodeJS, MongoDB, and SQL.",
-        "Delivered and maintained REST APIs and third-party integrations (Salesforce, Canva, Twilio, Bynder, HubSpot, Zapier) used in production customer workflows.",
-        "Led modernization initiatives on legacy codebases and engineering practices to improve maintainability and team velocity.",
+        "Delivered product updates and new features to the DIGIDECK Presentation platform on both the **AngularJS** frontend and **NodeJS, Express & MongoDB** backend.",
+        "Followed **Scrum & Agile** methodologies and participated in regular sprint ceremonies while collaborating with cross-functional teams to deliver high-quality software on time.",
+        "Fixed bugs and implemented security updates to maintain the integrity and reliability of the DIGIDECK platform while ensuring >99.99% uptime for users.",
+        "Developed and maintained CI/CD pipelines and **AWS** deployment workflows to support reliable production releases and efficient development processes.",
       ],
     },
     {
       company: "SideShift",
       title: "Architect Consultant",
-      period: "February 2024 – May 2024",
+      period: "February 2024 - May 2024",
       highlights: [
         "Defined scalable architecture and technical direction for a cross-platform React Native app (Web, iOS, Android) built with Expo and Postgres.",
         "Produced implementation standards and documentation for clean handoff to the internal engineering team.",
@@ -44,7 +44,7 @@ export const RESUME = {
     {
       company: "Union App LLC",
       title: "Full Stack Engineer",
-      period: "January 2016 – November 2018",
+      period: "January 2016 - November 2018",
       highlights: [
         "Built a social platform for US unions with Angular/TypeScript and NodeJS/MongoDB, delivering end-to-end product functionality.",
         "Implemented backend APIs and AWS deployment workflows to support reliable production releases.",
