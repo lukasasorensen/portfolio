@@ -15,6 +15,32 @@ export interface IProject {
 
 const Projects: IProject[] = [
   {
+    id: "digideck-ai-assistant",
+    title: "DIGIDECK AI Assistant",
+    shortDescription:
+      "Architected domain-aware AI + MCP workflows that enable governed, large-scale DIGIDECK edits in minutes instead of hours/days.",
+    description: `At Sportsdigita, I led the systems architecture and implementation of DIGIDECK AI Assistant, including in-editor assistant experiences and DIGIDECK MCP integrations for Claude, ChatGPT, Copilot, and similar AI clients. The platform combines domain-specific deck data with guarded tool access so teams can personalize presentations at scale while staying on-brand and compliant. \n\nI built orchestration workflows for outline generation, full presentation generation, and editor-side chat that can inspect slides and apply targeted content/layout changes through tool calls. I also extended the MCP server with OAuth-protected tools and documentation resources for decks, slides, and components, and added workflow run recording, audit trails, and OpenTelemetry instrumentation to improve observability, governance, and delivery confidence.`,
+    linkUrl: "https://www.thedigideck.com/ai/",
+    skillsUsed: [
+      "OpenAI",
+      "Claude",
+      "Ollama",
+      "LangChain",
+      "Typescript",
+      "NodeJS",
+      "Model Context Protocol (MCP)",
+      "Agentic AI Orchestration",
+      "Tool Calling",
+      "Observability/Governance",
+      "Redis",
+      "MongoDB",
+    ],
+    company: "Sportsdigita",
+    createdDate: new Date("2026-5-1"),
+    imageSrc: "/images/AI_PROJECT_1.png",
+    detailImages: [{ src: "/images/AI_PROJECT_1.png" }],
+  },
+  {
     id: "digideck-components",
     title: "DIGIDECK Components",
     description: `The goal of this project was to architect a way for any developer internally or externally to create a DIGIDECK Presentation Plugin, which is a modular part of the presentation content such as: images, videos, icons, arrows, and anything else you wish to create. During this project I led junior developers in creating an in-house Javascript Framework that extended the Custom Web Component API. \n\nA CLI was created to bootstrap a new DIGIDECK Plugin App. Developers then use the digideckCORE API to interact directly with the DIGIDECK presentation. Because the plugins are self-contained apps, presentation plugins are tree-shakeable which reduced the size of presentations. All APIs were documented on a Docusaurus documentation site complete with Algolia fuzzy searching for faster development.`,
@@ -69,11 +95,11 @@ const Projects: IProject[] = [
     id: "sideshift-app",
     title: "SideShift Mobile App",
     shortDescription:
-      "A job board and social media app for college students to easily apply to local businesses hiring.",
+      "Architecture leadership for a startup cross-platform job board and social app.",
     company: "SideShift",
     linkUrl: "https://www.sideshiftjobs.com/",
     skillsUsed: ["Typescript", "React Native", "Expo", "PostgresSQL", "Supabase", "Git", "Xcode", "Adobe XD"],
-    description: `SideShift is a startup app that connects college students to local hiring businesses. My task as a consultant was to lead the architecture of a React Native App that would be available on Web, iOS and Android. \n\nWith the Expo framework, and using Supabase Postgres DB as a backend I collaborated with junior and senior developers to create a social-media like job board that allows students to scroll through job postings and send applications easily. In addition, employers could create  job listings, message students, and manage applications.`,
+    description: `SideShift connects college students with local hiring businesses. As a consultant, I led architecture for a React Native application delivered across Web, iOS, and Android. \n\nUsing Expo with Supabase Postgres, I helped shape a maintainable system for job discovery, applications, employer workflows, and messaging, then documented implementation guidance for team handoff.`,
     createdDate: new Date("2024-4-1"),
     imageSrc: "/images/projectPhone.webp",
     detailImages: [{ src: "/images/projectPhone.webp" }],
