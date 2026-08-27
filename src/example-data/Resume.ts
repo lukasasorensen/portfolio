@@ -1,8 +1,8 @@
 export const RESUME = {
   name: "Lukas Sorensen",
-  title: "Lead Engineer / Systems Architect",
+  title: "Full Stack Software Engineer",
   summary:
-    "Lead Engineer and Systems Architect with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering.",
+    "Senior Full Stack Web Developer with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering.",
   contact: {
     email: "lukasasorensen@gmail.com",
     website: "lukasasorensen.com",
@@ -12,8 +12,8 @@ export const RESUME = {
   experience: [
     {
       company: "Sportsdigita",
-      title: "Lead Engineer & Architect",
-      period: "October 2022 - Present",
+      title: "Senior Full Stack & Lead Engineer",
+      period: "October 2023 - Present",
       highlights: [
         "Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled **Agentic Workflows** that enabled users to automate large updates to Master Decks over hundreds of slides, reducing effort by 70-90%.",
         "Integrated and engineered **AI Skills** and Tools with **Claude, Cursor, OpenAI, and Rovo** to increase productivity and output of the engineering team by 20-40% through automated code reviews, code generation, and security monitoring.",
@@ -24,7 +24,7 @@ export const RESUME = {
     {
       company: "Sportsdigita",
       title: "Full Stack Engineer",
-      period: "November 2018 - October 2022",
+      period: "November 2018 - October 2023",
       highlights: [
         "Delivered product updates and new features to the DIGIDECK Presentation platform on both the **AngularJS** frontend and **NodeJS, Express & MongoDB** backend.",
         "Followed **Scrum & Agile** methodologies and participated in regular sprint ceremonies while collaborating with cross-functional teams to deliver high-quality software on time.",

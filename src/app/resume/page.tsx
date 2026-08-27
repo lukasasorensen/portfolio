@@ -58,7 +58,7 @@ export default function Resume() {
           <h1 className={`mt-6 text-center text-4xl font-bold ${tw.TEXT_SECONDARY}`}>My Resume</h1>
           <div className="max-w-screen-md text-left">
             <p className="mt-2">
-              Lukas Sorensen is a Lead Engineer / Systems Architect with 10+ years of experience delivering production
+              Lukas Sorensen is a Full Stack Software Engineer with 10+ years of experience delivering production
               software with deep strengths in AI systems and full-stack engineering.
             </p>
           </div>
