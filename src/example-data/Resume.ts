@@ -2,7 +2,7 @@ export const RESUME = {
   name: "Lukas Sorensen",
   title: "Full Stack Software Engineer",
   summary:
-    "Senior Full Stack Web Developer with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering.",
+    "Senior full-stack engineer with 10+ years building production software, shaping product architecture, and leading engineering teams. Built extensible presentation tools and AI-powered workflows that reduce manual design work. Experienced in mentoring developers and delivering complex products from architecture through production.",
   contact: {
     email: "lukasasorensen@gmail.com",
     website: "lukasasorensen.com",
@@ -15,8 +15,7 @@ export const RESUME = {
       title: "Senior Full Stack & Lead Engineer",
       period: "October 2023 - Present",
       highlights: [
-        "Architected and built DIGIDECK’s presentation design editor and custom web component framework, enabling developers to create compatible presentation elements through an SDK and CLI, and users to arrange them into slide layouts with drag-and-drop controls, snapping, anchoring, and resizing.",
-        "Led technical architecture for DIGIDECK’s design editor, component framework, and AI assistant; guided an offshore engineering team in India building DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
+        "Led an offshore engineering team in India developing DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
         "Built AI-assisted workflows that redesign slides and apply changes across decks of 100+ slides, completing updates in approximately 1–3 hours that previously required 1–4 days of in-house design work.",
         "Integrated AI tools and reusable workflows using Claude, Cursor, OpenAI, and Rovo to support code generation, automate code reviews, and monitor security issues across the engineering team.",
       ],
@@ -26,18 +25,9 @@ export const RESUME = {
       title: "Full Stack Engineer",
       period: "November 2018 - October 2023",
       highlights: [
-        "Delivered product updates and new features to the DIGIDECK Presentation platform on both the **AngularJS** frontend and **NodeJS, Express & MongoDB** backend.",
+        "Architected and built DIGIDECK’s presentation design editor and custom web component framework, enabling developers to create compatible presentation elements through an SDK and CLI, and users to arrange them into slide layouts with drag-and-drop controls, snapping, anchoring, and resizing.",
         "Improved platform reliability through bug fixes and security updates, contributing to DIGIDECK’s company-reported 99.99% uptime.",
         "Developed and maintained CI/CD pipelines and **AWS** deployment workflows to support reliable production releases and efficient development processes.",
-      ],
-    },
-    {
-      company: "SideShift",
-      title: "Architect Consultant",
-      period: "February 2024 - May 2024",
-      highlights: [
-        "Defined scalable architecture and technical direction for a cross-platform React Native app (Web, iOS, Android) built with Expo and Postgres.",
-        "Produced implementation standards and documentation for clean handoff to the internal engineering team.",
       ],
     },
     {
@@ -99,19 +89,11 @@ export const RESUME = {
       link: "https://www.thedigideck.com/ai/",
     },
     {
-      title: "DIGIDECK Components",
+      title: "DIGIDECK Design Editor & Components",
       description:
-        "Architected a modular JavaScript Framework extending the Custom Web Components API, allowing internal and external developers to create presentation plugins. Includes a CLI to bootstrap new plugin apps, a digideckCORE API, and a Docusaurus documentation site with Algolia search.",
+        "Architected and built a visual presentation design editor backed by a custom web component framework. Enabled internal and external developers to create compatible presentation elements through an SDK, CLI, and digideckCORE API, supported by searchable documentation. Users compose responsive slide layouts with drag-and-drop controls, resizing, rotation, snapping, and anchoring.",
       company: "Sportsdigita",
-      skills: ["JavaScript", "NodeJS", "NPM", "Webpack", "Custom Web Components", "MongoDB", "ExpressJS", "Redis"],
-      link: "https://www.thedigideck.com/customize/",
-    },
-    {
-      title: "DIGIDECK Design Editor",
-      description:
-        "Architected and developed a Photoshop/Canva-like WYSIWYG editor in TypeScript allowing users to drag, resize, move, and rotate plugins on presentations. Features grid snapping, relative snapping, anchoring, percentage units, and multiple media queries.",
-      company: "Sportsdigita",
-      skills: ["TypeScript", "NodeJS", "Webpack", "SOLID/OOP", "CI/CD", "Git"],
+      skills: ["TypeScript", "JavaScript", "NodeJS", "NPM", "Webpack", "Custom Web Components", "MongoDB", "ExpressJS", "Redis", "SOLID/OOP", "CI/CD", "Git"],
       link: "https://www.thedigideck.com/design/",
     },
     {
