@@ -17,8 +17,8 @@ export const RESUME = {
       highlights: [
         "Architected and built DIGIDECK’s presentation design editor and custom web component framework, enabling developers to create compatible presentation elements through an SDK and CLI, and users to arrange them into slide layouts with drag-and-drop controls, snapping, anchoring, and resizing.",
         "Led technical architecture for DIGIDECK’s design editor, component framework, and AI assistant; guided an offshore engineering team in India building DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
-        "Integrated and engineered **AI Skills** and Tools with **Claude, Cursor, OpenAI, and Rovo** to increase productivity and output of the engineering team by 20-40% through automated code reviews, code generation, and security monitoring.",
-        "Continued to implement new product features for DIGIDECK using **TypeScript, React, Angular, NodeJS, MongoDB, and Redis**.",
+        "Built AI-assisted workflows that redesign slides and apply changes across decks of 100+ slides, completing updates in approximately 1–3 hours that previously required 1–4 days of in-house design work.",
+        "Integrated AI tools and reusable workflows using Claude, Cursor, OpenAI, and Rovo to support code generation, automate code reviews, and monitor security issues across the engineering team.",
       ],
     },
     {
@@ -27,8 +27,7 @@ export const RESUME = {
       period: "November 2018 - October 2023",
       highlights: [
         "Delivered product updates and new features to the DIGIDECK Presentation platform on both the **AngularJS** frontend and **NodeJS, Express & MongoDB** backend.",
-        "Followed **Scrum & Agile** methodologies and participated in regular sprint ceremonies while collaborating with cross-functional teams to deliver high-quality software on time.",
-        "Fixed bugs and implemented security updates to maintain the integrity and reliability of the DIGIDECK platform while ensuring >99.99% uptime for users.",
+        "Improved platform reliability through bug fixes and security updates, contributing to DIGIDECK’s company-reported 99.99% uptime.",
         "Developed and maintained CI/CD pipelines and **AWS** deployment workflows to support reliable production releases and efficient development processes.",
       ],
     },
