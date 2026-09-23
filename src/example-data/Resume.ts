@@ -16,7 +16,7 @@ export const RESUME = {
       period: "October 2023 - Present",
       highlights: [
         "Led an offshore engineering team in India developing DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
-        "Built AI-assisted workflows that redesign slides and apply changes across decks of 100+ slides, completing updates in approximately 1–3 hours that previously required 1–4 days of in-house design work.",
+        "Architected and built DIGI AI, a customer-facing AI assistant that lets users update individual slides or entire presentation decks through natural-language prompts, reducing time-intensive manual design work from days to hours.",
         "Integrated AI tools and reusable workflows using Claude, Cursor, OpenAI, and Rovo to support code generation, automate code reviews, and monitor security issues across the engineering team.",
       ],
     },
@@ -36,7 +36,8 @@ export const RESUME = {
       period: "January 2016 - November 2018",
       highlights: [
         "Built a social platform for US unions with Angular/TypeScript and NodeJS/MongoDB, delivering end-to-end product functionality.",
-        "Implemented backend APIs and AWS deployment workflows to support reliable production releases.",
+        "Built CI/CD workflows and deployed updates on AWS, gaining hands-on experience with deployment best practices and reliable release processes.",
+        "Established a foundation in full-stack engineering through hands-on development across user interfaces, backend services, databases, and production deployments.",
       ],
     },
   ],
