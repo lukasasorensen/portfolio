@@ -132,6 +132,8 @@ export default class PdfService {
     };
 
     const writeProjects = () => {
+      // Keep the section heading with the first project's reserved space.
+      ensureSpace(6 + 10 * 1.35 + 7 + 68);
       writeSectionTitle("Projects");
 
       for (const project of RESUME.projects) {

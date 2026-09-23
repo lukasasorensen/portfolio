@@ -2,7 +2,7 @@ export const RESUME = {
   name: "Lukas Sorensen",
   title: "Full Stack Software Engineer",
   summary:
-    "Senior Full Stack Web Developer with 10+ years delivering production software across startup, mid-sized, and contract environments. My focus combines AI systems and full-stack engineering.",
+    "Senior full-stack engineer with 10+ years building production software, shaping product architecture, and leading engineering teams. Built extensible presentation tools and AI-powered workflows that reduce manual design work. Experienced in mentoring developers and delivering complex products from architecture through production.",
   contact: {
     email: "lukasasorensen@gmail.com",
     website: "lukasasorensen.com",
@@ -15,10 +15,9 @@ export const RESUME = {
       title: "Senior Full Stack & Lead Engineer",
       period: "October 2023 - Present",
       highlights: [
-        "Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled **Agentic Workflows** that enabled users to automate large updates to Master Decks over hundreds of slides, reducing effort by 70-90%.",
-        "Integrated and engineered **AI Skills** and Tools with **Claude, Cursor, OpenAI, and Rovo** to increase productivity and output of the engineering team by 20-40% through automated code reviews, code generation, and security monitoring.",
-        "Maintained and hardened core DIGIDECK platform systems by delivering security updates and new product features to the main platform.",
-        "Continued to implement new product features for DIGIDECK using **TypeScript, React, Angular, NodeJS, MongoDB, and Redis**.",
+        "Led an offshore engineering team in India developing DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
+        "Architected and built DIGI AI, a customer-facing AI assistant that lets users update individual slides or entire presentation decks through natural-language prompts, reducing time-intensive manual design work from days to hours.",
+        "Integrated AI tools and reusable workflows using Claude, Cursor, OpenAI, and Rovo to support code generation, automate code reviews, and monitor security issues across the engineering team.",
       ],
     },
     {
@@ -26,19 +25,9 @@ export const RESUME = {
       title: "Full Stack Engineer",
       period: "November 2018 - October 2023",
       highlights: [
-        "Delivered product updates and new features to the DIGIDECK Presentation platform on both the **AngularJS** frontend and **NodeJS, Express & MongoDB** backend.",
-        "Followed **Scrum & Agile** methodologies and participated in regular sprint ceremonies while collaborating with cross-functional teams to deliver high-quality software on time.",
-        "Fixed bugs and implemented security updates to maintain the integrity and reliability of the DIGIDECK platform while ensuring >99.99% uptime for users.",
+        "Architected and built DIGIDECK’s presentation design editor and custom web component framework, enabling developers to create compatible presentation elements through an SDK and CLI, and users to arrange them into slide layouts with drag-and-drop controls, snapping, anchoring, and resizing.",
+        "Improved platform reliability through bug fixes and security updates, contributing to DIGIDECK’s company-reported 99.99% uptime.",
         "Developed and maintained CI/CD pipelines and **AWS** deployment workflows to support reliable production releases and efficient development processes.",
-      ],
-    },
-    {
-      company: "SideShift",
-      title: "Architect Consultant",
-      period: "February 2024 - May 2024",
-      highlights: [
-        "Defined scalable architecture and technical direction for a cross-platform React Native app (Web, iOS, Android) built with Expo and Postgres.",
-        "Produced implementation standards and documentation for clean handoff to the internal engineering team.",
       ],
     },
     {
@@ -47,7 +36,8 @@ export const RESUME = {
       period: "January 2016 - November 2018",
       highlights: [
         "Built a social platform for US unions with Angular/TypeScript and NodeJS/MongoDB, delivering end-to-end product functionality.",
-        "Implemented backend APIs and AWS deployment workflows to support reliable production releases.",
+        "Built CI/CD workflows and deployed updates on AWS, gaining hands-on experience with deployment best practices and reliable release processes.",
+        "Established a foundation in full-stack engineering through hands-on development across user interfaces, backend services, databases, and production deployments.",
       ],
     },
   ],
@@ -100,19 +90,11 @@ export const RESUME = {
       link: "https://www.thedigideck.com/ai/",
     },
     {
-      title: "DIGIDECK Components",
+      title: "DIGIDECK Design Editor & Components",
       description:
-        "Architected a modular JavaScript Framework extending the Custom Web Components API, allowing internal and external developers to create presentation plugins. Includes a CLI to bootstrap new plugin apps, a digideckCORE API, and a Docusaurus documentation site with Algolia search.",
+        "Architected and built a visual presentation design editor backed by a custom web component framework. Enabled internal and external developers to create compatible presentation elements through an SDK, CLI, and digideckCORE API, supported by searchable documentation. Users compose responsive slide layouts with drag-and-drop controls, resizing, rotation, snapping, and anchoring.",
       company: "Sportsdigita",
-      skills: ["JavaScript", "NodeJS", "NPM", "Webpack", "Custom Web Components", "MongoDB", "ExpressJS", "Redis"],
-      link: "https://www.thedigideck.com/customize/",
-    },
-    {
-      title: "DIGIDECK Design Editor",
-      description:
-        "Architected and developed a Photoshop/Canva-like WYSIWYG editor in TypeScript allowing users to drag, resize, move, and rotate plugins on presentations. Features grid snapping, relative snapping, anchoring, percentage units, and multiple media queries.",
-      company: "Sportsdigita",
-      skills: ["TypeScript", "NodeJS", "Webpack", "SOLID/OOP", "CI/CD", "Git"],
+      skills: ["TypeScript", "JavaScript", "NodeJS", "NPM", "Webpack", "Custom Web Components", "MongoDB", "ExpressJS", "Redis", "SOLID/OOP", "CI/CD", "Git"],
       link: "https://www.thedigideck.com/design/",
     },
     {
