@@ -15,9 +15,9 @@ export const RESUME = {
       title: "Senior Full Stack & Lead Engineer",
       period: "October 2023 - Present",
       highlights: [
-        "Led architecture and implementation of the DIGIDECK AI Assistant with MCP-enabled **Agentic Workflows** that enabled users to automate large updates to Master Decks over hundreds of slides, reducing effort by 70-90%.",
+        "Architected and built DIGIDECK’s presentation design editor and custom web component framework, enabling developers to create compatible presentation elements through an SDK and CLI, and users to arrange them into slide layouts with drag-and-drop controls, snapping, anchoring, and resizing.",
+        "Led technical architecture for DIGIDECK’s design editor, component framework, and AI assistant; guided an offshore engineering team in India building DIGIDECK Components and mentored onshore junior developers through code reviews and one-on-one pairing sessions.",
         "Integrated and engineered **AI Skills** and Tools with **Claude, Cursor, OpenAI, and Rovo** to increase productivity and output of the engineering team by 20-40% through automated code reviews, code generation, and security monitoring.",
-        "Maintained and hardened core DIGIDECK platform systems by delivering security updates and new product features to the main platform.",
         "Continued to implement new product features for DIGIDECK using **TypeScript, React, Angular, NodeJS, MongoDB, and Redis**.",
       ],
     },
